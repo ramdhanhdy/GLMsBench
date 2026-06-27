@@ -24,5 +24,7 @@ providers:
     base_url: <TBD>
     api_key_env: UMANS_API_KEY
     model_id: <TBD>
-    pricing: {input: <TBD>, output: <TBD>}
+    # Pricing must be filled in with real USD-per-1M-token values before a real
+    # run (placeholders of 0.0 let the example load + smoke-test for free).
+    pricing: {input: 0.0, output: 0.0}
     rate: {concurrency: 6}
