@@ -40,7 +40,12 @@ class ProviderClient:
         max_attempts: int = 5,
         base_backoff_ms: int = 1000,
         _transport: Optional[httpx.BaseTransport] = None,
+        name: Optional[str] = None,
     ):
+        # `name` is accepted so the runner can pass a provider label uniformly;
+        # the client itself is provider-agnostic and does not use it. It also
+        # lets a fake client (in tests) receive the same call signature.
+        self._name = name
         self._base_url = base_url.rstrip("/")
         self._api_key = api_key
         self._model_id = model_id
