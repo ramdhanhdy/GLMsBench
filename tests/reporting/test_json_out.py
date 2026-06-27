@@ -22,3 +22,19 @@ def test_build_report_structure(tmp_path):
     assert "requests" in report
     assert len(report["requests"]) == 2
     assert report["run_meta"]["config"]["model"] == "glm-5.2"
+
+
+def test_report_has_aggregates_with_canonical_parity():
+    """Spec §9: JSON report must carry an aggregates block. The parity
+    aggregate must use canonical comparison (same answer, different prose ->
+    0 disagreement). Regression guard for the §6.2 bug."""
+    recs = [
+        _rec("zai", "mmlu", "mmlu-0000", output="The answer is (C)."),
+        _rec("umans", "mmlu", "mmlu-0000", output="C"),
+    ]
+    report = build_report(recs)
+    assert "aggregates" in report
+    parity = report["aggregates"]["by_suite"]["mmlu"]["parity"]
+    assert parity["canonical_disagreement_rate"] == 0.0  # canonical agrees
+    assert parity["raw_text_agreement_rate"] == 0.0       # raw text differs
+    assert "cost" in report["aggregates"]

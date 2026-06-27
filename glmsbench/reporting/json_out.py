@@ -4,6 +4,7 @@ from dataclasses import asdict
 from datetime import datetime, timezone
 from typing import Optional
 from ..models import RequestRecord
+from .aggregates import build_aggregates
 
 
 def build_report(records: list[RequestRecord], config_dump: Optional[dict] = None) -> dict:
@@ -13,6 +14,7 @@ def build_report(records: list[RequestRecord], config_dump: Optional[dict] = Non
             "generated_at": datetime.now(timezone.utc).isoformat(),
             "n_requests": len(records),
         },
+        "aggregates": build_aggregates(records),
         "requests": [asdict(r) for r in records],
     }
 
