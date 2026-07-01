@@ -1,8 +1,28 @@
 # GLMsBench — GLM-5.2 Provider Benchmark
 
-Compares GLM-5.2 performance between Z.ai and umans across MMLU, GSM8K,
-ARC-Challenge, and HumanEval. Measures latency (TTFT, inter-token, e2e),
-output parity (temp=0), cost, and rate-limit behavior. Reports JSON + Markdown.
+A benchmark harness that compares **GLM-5.2** performance across two inference
+providers — [Z.ai](https://z.ai) and [umans](https://umans.ai) — on standard
+evaluation suites (MMLU, GSM8K, ARC-Challenge, HumanEval). It measures
+latency, output parity, cost, and rate-limit behavior, then reports the
+results as JSON + Markdown.
+
+Both providers serve the same underlying model (GLM-5.2), but through
+different infrastructure, pricing, and rate limits. This harness answers:
+*Are they actually equivalent from a user's perspective?*
+
+## What it measures
+
+- **Latency** — TTFT, inter-token, and end-to-end, reported as p50/p95.
+  Two populations are tracked: *clean* (no throttling) for apples-to-apples
+  inference speed, and *effective* (including backoff) for real-world
+  experience under load.
+- **Parity** — cross-provider answer disagreement at temperature=0. The
+  headline number for "do Z.ai and umans produce the same output?"
+- **Cost** — supports both metered (per-token) and subscription (flat-fee)
+  pricing models. Subscription plans are translated into an effective
+  $/1M-token range using configurable usage-intensity tiers.
+- **Rate limits** — 429s, backoff time, and retry counts per provider,
+  treated as a first-class signal rather than noise.
 
 ## Setup
 
@@ -14,11 +34,13 @@ cp .env.example .env   # then fill in ZAI_API_KEY / UMANS_API_KEY
 ```
 
 API keys are loaded from a `.env` file in the project root (auto-loaded by
-`load_config`, via `python-dotenv`) — `.env` is gitignored, never commit it.
+`load_config`, via `python-dotenv`) — `.env` is gitignored by default.
 Real shell environment variables (`export`/`$env:`) still work and take
 precedence over `.env` if both are set.
 
-## Run
+## Usage
+
+### Full benchmark
 
 ```bash
 .venv/Scripts/python.exe run.py --config harness/config.example.yaml --out results/
@@ -26,32 +48,51 @@ precedence over `.env` if both are set.
 
 Flags: `--suite mmlu,gsm8k` (subset), `--out results/`, `--resume`.
 
-## Smoke test (1-item, both providers, ~minimal spend)
+### Smoke test (minimal spend)
+
+Runs a tiny sample against live APIs to verify the pipeline end-to-end
+before committing budget to a full run:
 
 ```bash
 .venv/Scripts/python.exe scripts/smoke_test.py --config harness/config.example.yaml
+.venv/Scripts/python.exe scripts/smoke_test.py --config harness/config.example.yaml --suite arc --n 3
 ```
 
-## What it reports
+## Configuration
 
-- **Accuracy**: per-provider sample counts per benchmark (per-item scoring via
-  `glmsbench.scoring`).
-- **Parity**: cross-provider answer disagreement rate (temp=0) — the headline
-  number for "do Z.ai and umans behave identically?".
-- **Latency**: clean vs effective p50/p95 for TTFT / inter-token / e2e.
-  *Clean* excludes rate-limited requests; *effective* includes backoff.
-- **Cost**: total per provider (input + output tokens × pricing).
-- **Rate limits**: throttles (429s), backoff time, avg retries per provider.
+The config file (`harness/config.example.yaml`) defines providers, pricing,
+rate limits, and usage tiers. Key fields:
+
+- **`providers`** — `base_url`, `api_key_env`, `model_id`, `pricing`, and
+  `rate` (concurrency / rpm / tpm) per provider.
+- **`pricing`** — `mode: metered` (per-token `input`/`output` rates) or
+  `mode: subscription` (flat `monthly_usd`).
+- **`usage_tiers`** — tokens/day bands (e.g. `early_setup`, `maximized`)
+  used to compute an effective $/1M-token range for subscription providers.
+- **`generation`** — `temperature`, `max_tokens`, `seed`, and
+  `reasoning_effort` (GLM-5.2 reasons by default; set to `"none"` to
+  disable, `"low"`/`"medium"`/`"high"` to control depth).
 
 ## Architecture
 
-Single `glmsbench` package of single-purpose modules: provider-agnostic
-streaming client, dataset loaders, pure scoring functions, metrics, a runner
-with checkpoint/resume, and JSON + Markdown reporters.
-
-See `docs/superpowers/specs/2026-06-26-glm-5.2-provider-benchmark-design.md`
-for the full design and `docs/superpowers/plans/2026-06-26-glm-5.2-provider-benchmark.md`
-for the implementation plan.
+```
+glmsbench/
+  config.py            # Pydantic config models + .env loading
+  runner.py            # Async benchmark runner with checkpoint/resume
+  metrics.py           # Latency percentiles, cost, effective-cost-per-million
+  models.py            # RequestRecord, Timing, RateStats dataclasses
+  checkpoint.py        # JSONL checkpoint for resume
+  providers/
+    client.py          # Streaming OpenAI-compatible client with timing captures
+    retry.py           # Exponential backoff for 429/5xx
+    ratelimit.py       # Per-provider semaphore + leaky bucket
+  datasets/            # MMLU, GSM8K, ARC, HumanEval loaders
+  scoring/             # Answer extraction + parity comparison
+  reporting/
+    json_out.py        # JSON report with precomputed aggregates
+    markdown.py        # Markdown report with comparison tables
+    cost_model.py      # Cross-provider cost comparison (metered + subscription)
+```
 
 ## Tests
 

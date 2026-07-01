@@ -7,3 +7,4 @@ results/
 *.egg-info/
 .env
 checkpoint.jsonl
+docs/superpowers/
