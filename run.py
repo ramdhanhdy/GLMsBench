@@ -42,9 +42,10 @@ async def main():
         "suites": suites or cfg.suites,
         "repeats": {"parity": cfg.repeats.parity, "latency": cfg.repeats.latency},
     }
-    write_report(records, os.path.join(out_dir, "results.json"), config_dump)
+    providers_pricing = {name: p.pricing for name, p in cfg.providers.items()}
+    write_report(records, os.path.join(out_dir, "results.json"), config_dump, providers_pricing, cfg.usage_tiers)
     with open(os.path.join(out_dir, "report.md"), "w", encoding="utf-8") as f:
-        f.write(build_markdown(records))
+        f.write(build_markdown(records, providers_pricing, cfg.usage_tiers))
 
     print(f"Done. {len(records)} records -> {out_dir}/")
 

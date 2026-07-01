@@ -10,7 +10,9 @@ def _load_hf(*args, **kwargs):
 
 class GSM8KLoader:
     name = "gsm8k"
-    max_tokens = 256
+    # Budget covers hidden reasoning_content (low effort) + the visible
+    # step-by-step solution + "#### N" line.
+    max_tokens = 768
 
     def load(self, n: int) -> list[DatasetItem]:
         ds = _load_hf("openai/gsm8k", "main", split="test")

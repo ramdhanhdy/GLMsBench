@@ -66,6 +66,7 @@ class ProviderClient:
         max_tokens: int = 1024,
         seed: int = 42,
         top_p: float = 1.0,
+        reasoning_effort: Optional[str] = None,
     ) -> ChatResult:
         url = f"{self._base_url}/chat/completions"
         payload = {
@@ -78,6 +79,11 @@ class ProviderClient:
             "stream": True,
             "stream_options": {"include_usage": True},
         }
+        if reasoning_effort is not None:
+            # GLM-5.2 (both Z.ai and umans) reasons by default; this field is
+            # accepted/mapped on the OpenAI-compatible route by both
+            # providers. "none" disables reasoning entirely.
+            payload["reasoning_effort"] = reasoning_effort
         headers = {
             "Authorization": f"Bearer {self._api_key}",
             "Content-Type": "application/json",
@@ -172,6 +178,7 @@ class ProviderClient:
             e2e_ms=(t_end - t_start) * 1000.0,
             output_tokens=usage.get("completion_tokens", len(text_parts)),
             input_tokens=usage.get("prompt_tokens", 0),
+            reasoning_tokens=(usage.get("completion_tokens_details") or {}).get("reasoning_tokens", 0),
             stop_reason=finish_reason,
         )
         return text, timing

@@ -1,4 +1,5 @@
 import json
+from glmsbench.config import Pricing, UsageTier
 from glmsbench.models import RequestRecord, Timing, RateStats
 from glmsbench.reporting.json_out import build_report
 
@@ -38,3 +39,16 @@ def test_report_has_aggregates_with_canonical_parity():
     assert parity["canonical_disagreement_rate"] == 0.0  # canonical agrees
     assert parity["raw_text_agreement_rate"] == 0.0       # raw text differs
     assert "cost" in report["aggregates"]
+
+
+def test_report_includes_cost_by_tier_when_pricing_provided():
+    recs = [_rec("zai", "mmlu", "mmlu-0000"), _rec("umans", "mmlu", "mmlu-0000")]
+    providers_pricing = {
+        "zai": Pricing(mode="metered", input=1.4, output=4.4),
+        "umans": Pricing(mode="subscription", monthly_usd=50.0),
+    }
+    usage_tiers = {"maximized": UsageTier(tokens_per_day_min=100_000_000, tokens_per_day_max=300_000_000)}
+    report = build_report(recs, providers_pricing=providers_pricing, usage_tiers=usage_tiers)
+    cost_by_tier = report["aggregates"]["cost_by_tier"]
+    assert cost_by_tier["providers"]["umans"]["mode"] == "subscription"
+    assert "maximized" in cost_by_tier["providers"]["umans"]["effective_usd_per_million_by_tier"]

@@ -13,18 +13,54 @@ suite_sizes:
   gsm8k: 200
   arc: 200
   humaneval: 164
+# Usage-tier bands (tokens/day) used to turn each provider's flat
+# subscription fee into a comparable effective $/1M-token range. Based on
+# observed personal usage: light/early-setup days vs. hours maximized.
+usage_tiers:
+  early_setup: {tokens_per_day_min: 50000000, tokens_per_day_max: 90000000}
+  maximized: {tokens_per_day_min: 100000000, tokens_per_day_max: 300000000}
+
 providers:
   zai:
-    base_url: https://api.z.ai/v1
+    # Coding-plan OpenAI-compatible endpoint (NOT the general /v1 pay-as-you-go
+    # path — that 404s and wouldn't route through the subscription quota anyway).
+    # https://docs.z.ai/devpack/quick-start
+    base_url: https://api.z.ai/api/coding/paas/v4
     api_key_env: ZAI_API_KEY
     model_id: glm-5.2
-    pricing: {input: 1.40, output: 4.40}
+    # Real access here is via the Z.ai coding subscription (flat fee +
+    # quota), not metered pay-as-you-go. Using the Lite plan actually paid
+    # for; switch to Pro or to mode: metered (pay-per-token API, also
+    # offered by Z.ai and other GLM-5.2 inference providers) as needed.
+    #   - Lite: $16/mo, ~70M tokens/week observed before hitting the weekly
+    #     cap. Has both a 5-hour rolling limit and a weekly limit.
+    #   - Pro: $64/mo, ~5x Lite's usage allowance.
+    # RELIABILITY: Z.ai is the less-available side of the asymmetry — GLM-5.2
+    # is in high demand on their infra, so throttling/capacity issues are
+    # more frequent here than on umans. Conservative concurrency/rpm below
+    # reflect that; expect this provider to show up worse in the Rate
+    # Limits / effective-latency sections (that's the signal, not a bug).
+    pricing: {mode: subscription, monthly_usd: 16}
     rate: {concurrency: 2, rpm: 60, tpm: 500000}
   umans:
-    base_url: <TBD>
+    base_url: https://api.code.umans.ai/v1
     api_key_env: UMANS_API_KEY
-    model_id: <TBD>
-    # Pricing must be filled in with real USD-per-1M-token values before a real
-    # run (placeholders of 0.0 let the example load + smoke-test for free).
-    pricing: {input: 0.0, output: 0.0}
-    rate: {concurrency: 6}
+    model_id: umans-glm-5.2
+    # umans is subscription-only (no metered option known). Per
+    # https://app.umans.ai/offers/code/docs (Limits section), official plans:
+    #   - Code Max ($50/mo): unlimited tokens, no rolling request window, but
+    #     hard-capped at 4 in-flight requests — use this for real runs.
+    #   - Code Pro ($20/mo): 200 effective requests per rolling 5-hour window
+    #     (not a fixed reset), up to 5 in-flight — too restrictive for a full
+    #     benchmark run (thousands of requests) but fine for light use.
+    # Direct API-key HTTP access (what this harness does) is an officially
+    # supported "Manual Configuration" path, not just the umans CLI.
+    # RELIABILITY: umans is the more-available side of the asymmetry (no
+    # observed demand-driven outages), but its own constraint is the
+    # concurrency cap above, not throttling — though transient
+    # "overloaded_error" 502s have been observed and are retried by
+    # providers/retry.py. Empirically, running at 3 concurrent requests (not
+    # yet the max of 4) already sustains the 100-300M tokens/day "maximized"
+    # usage tier — so 4 likely has headroom beyond what's been tested.
+    pricing: {mode: subscription, monthly_usd: 50}
+    rate: {concurrency: 4}

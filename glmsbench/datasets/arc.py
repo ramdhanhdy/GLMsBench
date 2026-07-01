@@ -9,7 +9,8 @@ def _load_hf(*args, **kwargs):
 
 class ARCLoader:
     name = "arc"
-    max_tokens = 5
+    # See MMLULoader for the reasoning_effort/max_tokens rationale.
+    max_tokens = 300
 
     def load(self, n: int) -> list[DatasetItem]:
         ds = _load_hf("allenai/ai2_arc", "ARC-Challenge", split="test")

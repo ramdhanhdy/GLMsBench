@@ -9,7 +9,8 @@ def _load_hf(*args, **kwargs):
 
 class HumanEvalLoader:
     name = "humaneval"
-    max_tokens = 512
+    # Budget covers hidden reasoning_content (low effort) + a full function body.
+    max_tokens = 2048
 
     def load(self, n: int) -> list[DatasetItem]:
         ds = _load_hf("openai/openai_humaneval", split="test")

@@ -1,10 +1,13 @@
 from __future__ import annotations
-from typing import Callable, Optional
+from typing import Callable, Optional, TYPE_CHECKING
 from ..models import RequestRecord
-from ..metrics import latency_stats, cost_total
+from ..metrics import latency_stats, cost_total, effective_cost_per_million
 from ..scoring.parity import compare_text_parity
 from ..scoring.exact import extract_letter
 from ..scoring.numeric import extract_number
+
+if TYPE_CHECKING:
+    from ..config import Pricing, UsageTier
 
 
 def _extractor_for(suite: str) -> Optional[Callable[[str], Optional[str]]]:
@@ -21,7 +24,11 @@ def _extractor_for(suite: str) -> Optional[Callable[[str], Optional[str]]]:
     return None
 
 
-def build_markdown(records: list[RequestRecord]) -> str:
+def build_markdown(
+    records: list[RequestRecord],
+    providers_pricing: Optional[dict[str, "Pricing"]] = None,
+    usage_tiers: Optional[dict[str, "UsageTier"]] = None,
+) -> str:
     providers = sorted({r.provider for r in records})
     suites = sorted({r.suite for r in records})
     lines: list[str] = ["# GLM-5.2 Provider Benchmark\n"]
@@ -65,8 +72,33 @@ def build_markdown(records: list[RequestRecord]) -> str:
     lines.append("| Provider | Total USD |")
     lines.append("|---|---|")
     for prov in providers:
-        lines.append(f"| {prov} | {cost_total(records, prov):.4f} |")
+        pricing = (providers_pricing or {}).get(prov)
+        if pricing and pricing.mode == "subscription":
+            lines.append(f"| {prov} | flat ${pricing.monthly_usd:.2f}/mo (subscription, see tier table) |")
+        else:
+            lines.append(f"| {prov} | {cost_total(records, prov):.4f} |")
     lines.append("")
+
+    # --- Effective Cost by Usage Tier (subscription providers only) ---
+    subscription_provs = [p for p in providers
+                           if (providers_pricing or {}).get(p) and providers_pricing[p].mode == "subscription"]
+    if subscription_provs and usage_tiers:
+        lines.append("## Effective Cost by Usage Tier\n")
+        lines.append("| Provider | Plan | Usage Tier | $/1M tokens (high usage \u2013 low usage) |")
+        lines.append("|---|---|---|---|")
+        for prov in subscription_provs:
+            pricing = providers_pricing[prov]
+            for tier_name, tier in usage_tiers.items():
+                eff = effective_cost_per_million(
+                    pricing.monthly_usd, tier.tokens_per_day_min, tier.tokens_per_day_max
+                )
+                if eff is None:
+                    continue
+                lines.append(
+                    f"| {prov} | ${pricing.monthly_usd:.0f}/mo | {tier_name} | "
+                    f"${eff['high_usage_usd_per_million']:.4f} \u2013 ${eff['low_usage_usd_per_million']:.4f} |"
+                )
+        lines.append("")
 
     # --- Rate Limits ---
     lines.append("## Rate Limits\n")

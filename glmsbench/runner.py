@@ -69,7 +69,7 @@ async def run_benchmark(
                         clients[provider_name], limiters[provider_name],
                         provider_name, suite, item, "parity", 0,
                         cfg.generation.temperature, max_tokens, cfg.generation.seed,
-                        cfg.providers[provider_name].pricing,
+                        cfg.providers[provider_name].pricing, cfg.generation.reasoning_effort,
                     ))
                 # latency repeats
                 for k in range(cfg.repeats.latency):
@@ -78,7 +78,7 @@ async def run_benchmark(
                             clients[provider_name], limiters[provider_name],
                             provider_name, suite, item, "latency", k,
                             cfg.generation.temperature, max_tokens, cfg.generation.seed,
-                            cfg.providers[provider_name].pricing,
+                            cfg.providers[provider_name].pricing, cfg.generation.reasoning_effort,
                         ))
 
         results = await asyncio.gather(*tasks)
@@ -92,7 +92,12 @@ async def run_benchmark(
     return all_records
 
 
-def _compute_cost(record: RequestRecord, pricing) -> float:
+def _compute_cost(record: RequestRecord, pricing) -> Optional[float]:
+    """Per-request cost for metered pricing; None for flat-fee subscriptions,
+    where cost isn't attributable to a single request (see UsageTier-based
+    effective-cost reporting instead)."""
+    if pricing.mode == "subscription":
+        return None
     if not record.timing:
         return 0.0
     return (record.timing.input_tokens / 1_000_000) * pricing.input + \
@@ -100,10 +105,11 @@ def _compute_cost(record: RequestRecord, pricing) -> float:
 
 
 async def _run_one(client, limiter, provider, suite, item, pass_type, pass_index,
-                   temperature, max_tokens, seed, pricing) -> Optional[RequestRecord]:
+                   temperature, max_tokens, seed, pricing, reasoning_effort=None) -> Optional[RequestRecord]:
     async with limiter.acquire():
         result = await client.chat(
             item.prompt, temperature=temperature, max_tokens=max_tokens, seed=seed,
+            reasoning_effort=reasoning_effort,
         )
     record = RequestRecord(
         provider=provider, suite=suite, item_id=item.id, pass_type=pass_type,

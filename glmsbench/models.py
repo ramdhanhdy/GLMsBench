@@ -11,6 +11,7 @@ class Timing:
     e2e_ms: Optional[float] = None           # request sent -> last token
     output_tokens: int = 0
     input_tokens: int = 0
+    reasoning_tokens: int = 0        # hidden reasoning_content tokens, subset of output_tokens
     stop_reason: Optional[str] = None
 
 

@@ -12,7 +12,11 @@ def _load_hf(*args, **kwargs):
 
 class MMLULoader:
     name = "mmlu"
-    max_tokens = 5
+    # GLM-5.2 reasons by default (see Generation.reasoning_effort); reasoning
+    # tokens count against this cap before the visible answer letter.
+    # Measured ~70 reasoning tokens for a trivial MCQ at reasoning_effort="low";
+    # 300 gives headroom for harder questions.
+    max_tokens = 300
 
     def load(self, n: int) -> list[DatasetItem]:
         ds = _load_hf("cais/mmlu", "all", split="test")

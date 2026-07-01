@@ -1,3 +1,4 @@
+from glmsbench.config import Pricing, UsageTier
 from glmsbench.models import RequestRecord, Timing, RateStats
 from glmsbench.reporting.markdown import build_markdown
 
@@ -59,3 +60,19 @@ def test_gsm8k_parity_uses_numeric_extraction():
     md = build_markdown(recs)
     # Both extract to 5 -> canonical disagreement must be 0.0%.
     assert "0.0%" in md
+
+
+def test_subscription_provider_reports_flat_fee_and_tier_table():
+    recs = [
+        _rec("zai", "mmlu", "mmlu-0000", output="A"),
+        _rec("umans", "mmlu", "mmlu-0000", output="A"),
+    ]
+    providers_pricing = {
+        "zai": Pricing(mode="metered", input=1.4, output=4.4),
+        "umans": Pricing(mode="subscription", monthly_usd=50.0),
+    }
+    usage_tiers = {"maximized": UsageTier(tokens_per_day_min=100_000_000, tokens_per_day_max=300_000_000)}
+    md = build_markdown(recs, providers_pricing, usage_tiers)
+    assert "flat $50.00/mo (subscription" in md
+    assert "Effective Cost by Usage Tier" in md
+    assert "maximized" in md

@@ -10,9 +10,13 @@ output parity (temp=0), cost, and rate-limit behavior. Reports JSON + Markdown.
 python -m venv .venv
 .venv/Scripts/python.exe -m pip install -e ".[dev]"   # Windows
 # .venv/bin/python -m pip install -e ".[dev]"         # macOS/Linux
-export ZAI_API_KEY=...
-export UMANS_API_KEY=...
+cp .env.example .env   # then fill in ZAI_API_KEY / UMANS_API_KEY
 ```
+
+API keys are loaded from a `.env` file in the project root (auto-loaded by
+`load_config`, via `python-dotenv`) — `.env` is gitignored, never commit it.
+Real shell environment variables (`export`/`$env:`) still work and take
+precedence over `.env` if both are set.
 
 ## Run
 

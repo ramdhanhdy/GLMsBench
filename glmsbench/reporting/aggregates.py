@@ -1,10 +1,14 @@
 from __future__ import annotations
-from typing import Optional
+from typing import Optional, TYPE_CHECKING
 from ..models import RequestRecord
 from ..metrics import latency_stats, cost_total
 from ..scoring.parity import compare_text_parity
 from ..scoring.exact import extract_letter
 from ..scoring.numeric import extract_number
+from .cost_model import build_cost_comparison
+
+if TYPE_CHECKING:
+    from ..config import Pricing, UsageTier
 
 
 def _extractor_for(suite: str):
@@ -15,11 +19,20 @@ def _extractor_for(suite: str):
     return None
 
 
-def build_aggregates(records: list[RequestRecord]) -> dict:
+def build_aggregates(
+    records: list[RequestRecord],
+    providers_pricing: Optional[dict[str, "Pricing"]] = None,
+    usage_tiers: Optional[dict[str, "UsageTier"]] = None,
+) -> dict:
     """Compute per-(provider,suite) latency/cost and cross-provider parity.
 
     Mirrors the Markdown report's logic but in machine-readable form so the JSON
     report carries precomputed aggregates (spec §9), not just raw records.
+
+    `providers_pricing`/`usage_tiers` are optional; when provided, a
+    `cost_by_tier` block is added covering subscription-priced providers'
+    effective $/1M-token range under each usage tier (metered providers are
+    already covered by the additive `cost` block).
     """
     providers = sorted({r.provider for r in records})
     suites = sorted({r.suite for r in records})
@@ -42,6 +55,9 @@ def build_aggregates(records: list[RequestRecord]) -> dict:
 
     for prov in providers:
         aggregates["cost"][prov] = cost_total(records, prov)
+
+    if providers_pricing:
+        aggregates["cost_by_tier"] = build_cost_comparison(providers_pricing, usage_tiers or {})
 
     return aggregates
 

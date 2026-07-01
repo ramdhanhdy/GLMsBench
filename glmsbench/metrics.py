@@ -55,6 +55,29 @@ def cost_total(records: list[RequestRecord], provider: str) -> float:
     return sum(r.cost_usd or 0.0 for r in records if r.provider == provider and r.ok)
 
 
+def effective_cost_per_million(
+    monthly_usd: float,
+    tokens_per_day_min: float,
+    tokens_per_day_max: float,
+    days_per_month: float = 30.0,
+) -> Optional[dict]:
+    """Translate a flat monthly subscription fee into an effective
+    $/1M-token range, given an assumed daily usage-intensity band.
+
+    Higher daily consumption spreads the flat fee over more tokens ->
+    cheaper effective rate; lower consumption -> pricier effective rate.
+    Returns None if either bound is non-positive (can't divide).
+    """
+    if tokens_per_day_min <= 0 or tokens_per_day_max <= 0:
+        return None
+    low_usage_tokens = tokens_per_day_min * days_per_month
+    high_usage_tokens = tokens_per_day_max * days_per_month
+    return {
+        "low_usage_usd_per_million": monthly_usd / (low_usage_tokens / 1_000_000),
+        "high_usage_usd_per_million": monthly_usd / (high_usage_tokens / 1_000_000),
+    }
+
+
 def tokens_per_sec(t: Timing) -> Optional[float]:
     if t.e2e_ms is None or t.ttft_ms is None or t.e2e_ms == t.ttft_ms:
         return None

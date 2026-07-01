@@ -9,7 +9,7 @@ class FakeClient:
         self.name = name
         self.outputs = {"zai": "A", "umans": "A"}
 
-    async def chat(self, prompt, temperature=0.0, max_tokens=5, seed=42, top_p=1.0):
+    async def chat(self, prompt, temperature=0.0, max_tokens=5, seed=42, top_p=1.0, reasoning_effort=None):
         from glmsbench.providers.client import ChatResult
         text = self.outputs[self.name]
         return ChatResult(

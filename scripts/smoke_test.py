@@ -1,12 +1,15 @@
-"""Smoke-test a single provider config against a 1-item MMLU run.
+"""Smoke-test a provider config against a tiny (default n=1) benchmark run.
 
 Usage:
-    ZAI_API_KEY=... UMANS_API_KEY=... python scripts/smoke_test.py --config harness/config.example.yaml
+    python scripts/smoke_test.py --config harness/config.example.yaml
+    python scripts/smoke_test.py --config harness/config.example.yaml --suite arc --n 3
 
-This runs each configured suite at n=1 for both providers, prints the per-request
-JSON and confirms the pipeline (client -> runner -> JSON report) works end-to-end
-before committing budget to a full run. Keep this in scripts/ — it is not
-a unit test (it hits the network and spends tokens).
+API keys are read from .env (see .env.example) or real env vars.
+Runs the selected suite(s) (default: all in config) at n items (default 1)
+for both providers, prints the per-request JSON and confirms the pipeline
+(client -> runner -> JSON report) works end-to-end before committing budget
+to a full run. Keep this in scripts/ — it is not a unit test (it hits the
+network and spends tokens).
 """
 import argparse
 import asyncio
@@ -26,17 +29,24 @@ async def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--config", required=True)
     ap.add_argument("--out", default="smoke_results")
+    ap.add_argument("--suite", default=None, help="Comma-list subset of suites (default: all in config)")
+    ap.add_argument("--n", type=int, default=1, help="Items per suite (default: 1)")
     args = ap.parse_args()
 
     cfg = load_config(args.config)
-    cfg.suite_sizes = {s: 1 for s in cfg.suites}
+    suites = args.suite.split(",") if args.suite else cfg.suites
+    cfg.suite_sizes = {s: args.n for s in suites}
     cfg.repeats.latency = 1
 
     records = await run_benchmark(
         cfg, out_dir=args.out, checkpoint_path=str(Path(args.out) / "ck.jsonl"),
-        suites=cfg.suites,
+        suites=suites,
     )
-    report = build_report(records, {"model": cfg.model, "providers": list(cfg.providers)})
+    providers_pricing = {name: p.pricing for name, p in cfg.providers.items()}
+    report = build_report(
+        records, {"model": cfg.model, "providers": list(cfg.providers)},
+        providers_pricing, cfg.usage_tiers,
+    )
     print(json.dumps(report, indent=2, default=str))
 
 
