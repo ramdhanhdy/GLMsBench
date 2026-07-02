@@ -1,0 +1,154 @@
+{
+  "source_results": "results/arc-n30-merged-zai-umans-c2-20260702T112934Z/raw/results.json",
+  "suites": [
+    "arc"
+  ],
+  "providers": [
+    "umans",
+    "zai"
+  ],
+  "n_requests": 120,
+  "n_items": 30,
+  "provider_quality": {
+    "umans": {
+      "requests": 60,
+      "ok_requests": 60,
+      "parseable_answers": 48,
+      "unknown_answers": 12,
+      "empty_content": 12,
+      "correct_requests": 48,
+      "incorrect_requests": 0,
+      "strict_task_success": 0.8,
+      "answered_only_accuracy": 1.0,
+      "exact_single_letter_outputs": 48,
+      "length_stops": 12,
+      "items_all_correct": 22,
+      "items_stable_correct": 22,
+      "items_both_wrong_same": 0,
+      "wrong_stable_items": [],
+      "unstable_or_unknown_items": [
+        "arc-0004",
+        "arc-0005",
+        "arc-0010",
+        "arc-0011",
+        "arc-0019",
+        "arc-0020",
+        "arc-0028",
+        "arc-0029"
+      ],
+      "e2e_ms_non_empty_median": 4816.837701015174,
+      "e2e_ms_empty_median": 17084.44705232978,
+      "e2e_ms_correct_median": 4816.837701015174,
+      "e2e_ms_unknown_median": 17084.44705232978,
+      "answer_distribution": {
+        "A": 8,
+        "B": 17,
+        "C": 19,
+        "D": 4,
+        "UNKNOWN": 12
+      }
+    },
+    "zai": {
+      "requests": 60,
+      "ok_requests": 60,
+      "parseable_answers": 52,
+      "unknown_answers": 8,
+      "empty_content": 8,
+      "correct_requests": 52,
+      "incorrect_requests": 0,
+      "strict_task_success": 0.8666666666666667,
+      "answered_only_accuracy": 1.0,
+      "exact_single_letter_outputs": 51,
+      "length_stops": 8,
+      "items_all_correct": 25,
+      "items_stable_correct": 25,
+      "items_both_wrong_same": 0,
+      "wrong_stable_items": [],
+      "unstable_or_unknown_items": [
+        "arc-0004",
+        "arc-0005",
+        "arc-0011",
+        "arc-0028",
+        "arc-0029"
+      ],
+      "e2e_ms_non_empty_median": 4652.010301593691,
+      "e2e_ms_empty_median": 7774.405288510025,
+      "e2e_ms_correct_median": 4652.010301593691,
+      "e2e_ms_unknown_median": 7774.405288510025,
+      "answer_distribution": {
+        "A": 9,
+        "B": 19,
+        "C": 20,
+        "D": 4,
+        "UNKNOWN": 8
+      }
+    }
+  },
+  "item_summary": {
+    "both_providers_all_passes_correct": 22,
+    "items_with_any_unknown_answer": [
+      "arc-0004",
+      "arc-0005",
+      "arc-0010",
+      "arc-0011",
+      "arc-0019",
+      "arc-0020",
+      "arc-0028",
+      "arc-0029"
+    ],
+    "outcome_classes": {
+      "Both providers 2/2 correct": [
+        "arc-0000",
+        "arc-0001",
+        "arc-0002",
+        "arc-0003",
+        "arc-0006",
+        "arc-0007",
+        "arc-0008",
+        "arc-0009",
+        "arc-0012",
+        "arc-0013",
+        "arc-0014",
+        "arc-0015",
+        "arc-0016",
+        "arc-0017",
+        "arc-0018",
+        "arc-0021",
+        "arc-0022",
+        "arc-0023",
+        "arc-0024",
+        "arc-0025",
+        "arc-0026",
+        "arc-0027"
+      ],
+      "Both providers have full-empty item or severe cap issue": [
+        "arc-0004",
+        "arc-0028"
+      ],
+      "At least one provider unstable: one pass correct, one pass empty": [
+        "arc-0005",
+        "arc-0010",
+        "arc-0011",
+        "arc-0019",
+        "arc-0020",
+        "arc-0029"
+      ]
+    }
+  },
+  "gold_distribution": {
+    "A": 5,
+    "B": 11,
+    "C": 11,
+    "D": 3
+  },
+  "opportunities": [
+    "Add gold labels to normalization output so accuracy/correctness is first-class, not a separate join.",
+    "Report request-level accuracy, item-level accuracy, answered-only accuracy, and unknown parse rate separately.",
+    "Track pass-to-pass stability: parity and latency passes can disagree even at temperature 0.",
+    "Separate benchmark capability from provider reliability: correctness only among completed requests hides failed-request impact.",
+    "Analyze hard items: list items missed by both providers, missed by only one provider, and unknown/non-letter outputs.",
+    "Measure latency-quality coupling: compare latency/token counts for correct vs incorrect/unknown outputs.",
+    "Scale n beyond 30 because the current sample has high variance and answer-label imbalance.",
+    "Store dataset metadata (question, choices, gold, category) in raw results for reproducible audits without reloading HF."
+  ]
+}
