@@ -1,0 +1,382 @@
+{
+  "source_results": "results/arc-n30-merged-zai-umans-c2-20260702T112934Z/raw/results.json",
+  "n_requests": 120,
+  "providers": [
+    "umans",
+    "zai"
+  ],
+  "suites": [
+    "arc"
+  ],
+  "provider_summary": {
+    "umans": {
+      "requests": 60,
+      "ok_requests": 60,
+      "error_requests": 0,
+      "input_tokens": {
+        "n": 60,
+        "min": 64.0,
+        "max": 155.0,
+        "mean": 107.3,
+        "median": 105.5,
+        "p95": 146.0
+      },
+      "output_tokens": {
+        "n": 60,
+        "min": 49.0,
+        "max": 300.0,
+        "mean": 181.8,
+        "median": 177.0,
+        "p95": 300.0
+      },
+      "total_tokens": {
+        "n": 60,
+        "min": 142.0,
+        "max": 445.0,
+        "mean": 289.1,
+        "median": 277.5,
+        "p95": 441.0
+      },
+      "ttft_ms": {
+        "n": 48,
+        "min": 1495.2797694131732,
+        "max": 55416.77411738783,
+        "mean": 9689.29720018059,
+        "median": 4816.452680155635,
+        "p95": 28107.199472002685
+      },
+      "e2e_ms": {
+        "n": 60,
+        "min": 1541.5906114503741,
+        "max": 83804.26018405706,
+        "mean": 13655.540248084193,
+        "median": 5719.331604428589,
+        "p95": 55143.881184468046
+      },
+      "inter_token_latency_ms": {
+        "n": 0,
+        "min": null,
+        "max": null,
+        "mean": null,
+        "median": null,
+        "p95": null
+      },
+      "throttled_events": 0,
+      "backoff_ms": 16724.363466441886,
+      "avg_attempts": 1.1333333333333333
+    },
+    "zai": {
+      "requests": 60,
+      "ok_requests": 60,
+      "error_requests": 0,
+      "input_tokens": {
+        "n": 60,
+        "min": 64.0,
+        "max": 155.0,
+        "mean": 107.3,
+        "median": 105.5,
+        "p95": 146.0
+      },
+      "output_tokens": {
+        "n": 60,
+        "min": 60.0,
+        "max": 300.0,
+        "mean": 165.98333333333332,
+        "median": 154.0,
+        "p95": 300.0
+      },
+      "total_tokens": {
+        "n": 60,
+        "min": 134.0,
+        "max": 445.0,
+        "mean": 273.28333333333336,
+        "median": 264.0,
+        "p95": 408.69999999999993
+      },
+      "ttft_ms": {
+        "n": 52,
+        "min": 2090.745567344129,
+        "max": 10991.409385576844,
+        "mean": 4817.164435355852,
+        "median": 4651.980250608176,
+        "p95": 8160.4965556412935
+      },
+      "e2e_ms": {
+        "n": 60,
+        "min": 2090.768071822822,
+        "max": 10991.445186547935,
+        "mean": 5211.689043759058,
+        "median": 4859.997828491032,
+        "p95": 8905.324532231316
+      },
+      "inter_token_latency_ms": {
+        "n": 1,
+        "min": 0.013162381947040558,
+        "max": 0.013162381947040558,
+        "mean": 0.013162381947040558,
+        "median": 0.013162381947040558,
+        "p95": 0.013162381947040558
+      },
+      "throttled_events": 0,
+      "backoff_ms": 0.0,
+      "avg_attempts": 1.0
+    }
+  },
+  "parity_summary": {
+    "arc": {
+      "providers": [
+        "umans",
+        "zai"
+      ],
+      "n_compared": 30,
+      "canonical_disagreements": 0,
+      "canonical_unknown": 8,
+      "canonical_disagreement_rate": 0.0,
+      "raw_text_agreements": 24,
+      "raw_text_agreement_rate": 0.8,
+      "pairs": [
+        {
+          "suite": "arc",
+          "item_id": "arc-0000",
+          "umans_answer": "C",
+          "zai_answer": "C",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0001",
+          "umans_answer": "B",
+          "zai_answer": "B",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0002",
+          "umans_answer": "C",
+          "zai_answer": "C",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0003",
+          "umans_answer": "D",
+          "zai_answer": "D",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0004",
+          "umans_answer": null,
+          "zai_answer": null,
+          "canonical_agree": false,
+          "canonical_unknown": true
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0005",
+          "umans_answer": null,
+          "zai_answer": null,
+          "canonical_agree": false,
+          "canonical_unknown": true
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0006",
+          "umans_answer": "C",
+          "zai_answer": "C",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0007",
+          "umans_answer": "C",
+          "zai_answer": "C",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0008",
+          "umans_answer": "B",
+          "zai_answer": "B",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0009",
+          "umans_answer": "A",
+          "zai_answer": "A",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0010",
+          "umans_answer": null,
+          "zai_answer": "B",
+          "canonical_agree": false,
+          "canonical_unknown": true
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0011",
+          "umans_answer": null,
+          "zai_answer": "A",
+          "canonical_agree": false,
+          "canonical_unknown": true
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0012",
+          "umans_answer": "C",
+          "zai_answer": "C",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0013",
+          "umans_answer": "C",
+          "zai_answer": "C",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0014",
+          "umans_answer": "C",
+          "zai_answer": "C",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0015",
+          "umans_answer": "A",
+          "zai_answer": "A",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0016",
+          "umans_answer": "C",
+          "zai_answer": "C",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0017",
+          "umans_answer": "B",
+          "zai_answer": "B",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0018",
+          "umans_answer": "A",
+          "zai_answer": "A",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0019",
+          "umans_answer": null,
+          "zai_answer": "C",
+          "canonical_agree": false,
+          "canonical_unknown": true
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0020",
+          "umans_answer": null,
+          "zai_answer": "B",
+          "canonical_agree": false,
+          "canonical_unknown": true
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0021",
+          "umans_answer": "B",
+          "zai_answer": "B",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0022",
+          "umans_answer": "A",
+          "zai_answer": "A",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0023",
+          "umans_answer": "C",
+          "zai_answer": "C",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0024",
+          "umans_answer": "B",
+          "zai_answer": "B",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0025",
+          "umans_answer": "D",
+          "zai_answer": "D",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0026",
+          "umans_answer": "B",
+          "zai_answer": "B",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0027",
+          "umans_answer": "B",
+          "zai_answer": "B",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0028",
+          "umans_answer": null,
+          "zai_answer": null,
+          "canonical_agree": false,
+          "canonical_unknown": true
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0029",
+          "umans_answer": "B",
+          "zai_answer": null,
+          "canonical_agree": false,
+          "canonical_unknown": true
+        }
+      ]
+    }
+  },
+  "upstream_aggregates": {}
+}
