@@ -1,0 +1,18 @@
+{
+  "clean_run": "/opt/data/GLMsBench/results/arc-n100-clean-max1200-20260702T164929Z",
+  "records": 400,
+  "ok": 400,
+  "fail": 0,
+  "by_provider": {
+    "umans": {
+      "records": 200,
+      "ok": 200,
+      "fail": 0
+    },
+    "zai": {
+      "records": 200,
+      "ok": 200,
+      "fail": 0
+    }
+  }
+}

@@ -1,0 +1,105 @@
+item_id,gold,question,umans_answers,umans_correct,umans_unknown,umans_stable,zai_answers,zai_correct,zai_unknown,zai_stable
+arc-0000,C,An astronomer observes that a planet rotates faster after a meteorite impact. Which is the most likely effect of this increase in rotation?,C|C,2,0,True,C|C,2,0,True
+arc-0001,B,A group of engineers wanted to know how different building designs would respond during an earthquake. They made several models of buildings and tested each for its ability to withstand earthquake conditions. Which will most likely result from testing different building designs?,B|B,2,0,True,B|B,2,0,True
+arc-0002,C,The end result in the process of photosynthesis is the production of sugar and oxygen. Which step signals the beginning of photosynthesis?,C|C,2,0,True,C|C,2,0,True
+arc-0003,D,"A physicist wants to determine the speed a car must reach to jump over a ramp. The physicist conducts three trials. In trials two and three, the speed of the car is increased by 20 miles per hour. What is the physicist investigating when he changes the speed?",D|D,2,0,True,D|D,2,0,True
+arc-0004,D,An astronaut drops a 1.0 kg object and a 5.0 kg object on the Moon. Both objects fall a total distance of 2.0 m vertically. Which of the following best describes the objects after they have fallen a distance of 1.0 m?,D|D,2,0,True,D|D,2,0,True
+arc-0005,B,Devil facial tumor disease (DFTD) is a disease that is decimating the population of Tasmanian devils. The disease passes from one animal to another through bites and is caused by parasites. The parasites cause cancerous tumors that spread throughout an infected animal's body and kill it. What is the best description of DFTD?,B|B,2,0,True,B|B,2,0,True
+arc-0006,C,"A type of small mammal from the mountain regions of the western United States makes its home out of piles of rock. During summer months, the mammal places grasses and seeds in protected places in the rock piles. Which of the following is the most likely reason for this behavior?",C|C,2,0,True,C|C,2,0,True
+arc-0007,C,Petrified palm trees are found in sedimentary rock near glaciers. The presence of the petrified palm trees most likely provides evidence for which statement?,C|C,2,0,True,C|C,2,0,True
+arc-0008,B,Farmers in Wyoming were concerned because some of their chickens were being preyed upon by hawks that lived in areas around their ranches. The farmers grouped together and hunted the hawks until they were no longer in their area. Which would most likely happen next?,B|B,2,0,True,B|B,2,0,True
+arc-0009,A,Copper is an element that is used in electrical wires. What is the smallest unit of copper that still maintains the characteristics of copper?,A|A,2,0,True,A|A,2,0,True
+arc-0010,B,"According to cell classification, prokaryotic cells are separated from eukaryotic cells. Which feature is often used to distinguish prokaryotic cells from eukaryotic cells?",B|B,2,0,True,B|B,2,0,True
+arc-0011,A,Which statement best describes the effect of the Sun on the oceans?,A|A,2,0,True,A|A,2,0,True
+arc-0012,C,"The morning temperature in a city is 41°F. If a sunny, mild day is forecast, which temperature is most likely for 2:00 p.m.?",C|C,2,0,True,C|C,2,0,True
+arc-0013,C,A class plans an investigation to see which brand of light bulb lasts the longest. Which of these steps should come first?,C|C,2,0,True,C|C,2,0,True
+arc-0014,C,Which of these gases is the most abundant greenhouse gas in the lower atmosphere of Earth?,C|C,2,0,True,C|C,2,0,True
+arc-0015,A,At which temperature does water freeze?,A|A,2,0,True,A|A,2,0,True
+arc-0016,C,"Fossil bones and teeth of dinosaurs have been researched for the last century. Recent discoveries of fossilized dinosaurs have also revealed details of soft tissues, such as skin. Which is best for a scientist to do when reporting research on dinosaurs now?",C|C,2,0,True,C|C,2,0,True
+arc-0017,B,"Molly was making iced tea by putting tea bags in boiling water. She needed to cool the hot tea quickly, so she poured it into a pitcher full of ice. Which best describes the flow of thermal energy?",B|B,2,0,True,B|B,2,0,True
+arc-0018,A,Logging companies cut trees in a forest and send the trees to lumber mills far from the forest. The mills make boards that are used for construction. Some logging companies do not plant tree seedlings after cutting trees. Not planting tree seedlings might affect people who need boards in the future because,A|A,2,0,True,A|A,2,0,True
+arc-0019,C,"It was once thought that living organisms could come from non-living matter. For example, people believed that flies would develop from rotting meat. This idea was later disproved primarily because of",C|C,2,0,True,C|C,2,0,True
+arc-0020,B,Cells take in food for energy. The part of the cell that aids in digestion of the food is the lysosome. What is the main role of lysosomes in the process of food digestion?,B|B,2,0,True,B|B,2,0,True
+arc-0021,B,"When an electric current is passed through water (H_{2}O) using a specific apparatus, hydrogen (H_{2}) and oxygen (O_{2}) gases form. How can this reaction be shown in a chemical equation?",B|B,2,0,True,B|B,2,0,True
+arc-0022,A,Which is a fact about penguins?,A|A,2,0,True,A|A,2,0,True
+arc-0023,C,"A glass of water at 110°F is placed in a room next to a glass of water that is 50°F. The temperature of the room is 73°F at all times. If the two glasses were left in the room overnight, the temperature for both glasses of water the next day would be approximately",C|C,2,0,True,C|C,2,0,True
+arc-0024,B,"Snow, rain, hail, and fog are all forms of",B|B,2,0,True,B|B,2,0,True
+arc-0025,D,"Scott filled a tray with juice and put it in a freezer. The next day, Scott opened the freezer. How did the juice most likely change?",D|D,2,0,True,D|D,2,0,True
+arc-0026,B,"On August 21, a flash flood warning was issued for the Las Vegas area. Which statement best describes this warning in terms of weather and climate?",B|B,2,0,True,B|B,2,0,True
+arc-0027,B,Students heated three objects to different temperatures during a classroom demonstration. Each object emitted light of a different color as shown below. Object 1: blue light Object 2: red light Object 3: orange light Which list presents the objects in order from highest to lowest temperature?,B|B,2,0,True,B|B,2,0,True
+arc-0028,C,Tiny organisms called plankton live in oceans. Some plankton can take energy from the Sun and turn it into food. How are plankton most useful to the animals that live in the ocean?,C|C,2,0,True,C|C,2,0,True
+arc-0029,B,Which statement best explains why a tree branch floats on water?,B|NULL,1,1,False,B|B,2,0,True
+arc-0030,D,Students are observing two fossils in a lab. They are told by the teacher that the fossils were found in different rock layers. What can the students most likely determine from just observing the fossils?,D|D,2,0,True,D|D,2,0,True
+arc-0031,C,Earth's distance from the Sun enables water to be readily available for organisms. Which property of water is most important for these organisms?,C|C,2,0,True,C|C,2,0,True
+arc-0032,A,Which statement correctly describes a property of a type of matter?,A|A,2,0,True,A|A,2,0,True
+arc-0033,C,Which statement describes a positive effect of a scientific discovery?,C|C,2,0,True,C|C,2,0,True
+arc-0034,A,Which natural event occurs with the most frequency?,A|A,2,0,True,A|A,2,0,True
+arc-0035,A,A scientist maps a long region in which earthquakes originate and determines this region is a transform plate boundary. Which evidence would cause the scientist to reevaluate this determination?,NULL|A,1,1,False,A|A,2,0,True
+arc-0036,B,"Which best describes how the sun might compare to a different-sized star, if they were right next to each other?",B|B,2,0,True,B|B,2,0,True
+arc-0037,B,Which statement is true about the solar system?,B|B,2,0,True,B|B,2,0,True
+arc-0038,C,What is the main function of photosynthetic cells within a plant?,C|C,2,0,True,C|C,2,0,True
+arc-0039,B,Which of the following is the primary difference between hydraulic and pneumatic systems?,B|B,2,0,True,B|B,2,0,True
+arc-0040,C,"In the spring and early summer, bears often scratch their backs against trees to remove winter fur. This is an example of an animal",C|C,2,0,True,C|C,2,0,True
+arc-0041,A,Which event occurs once per day?,A|A,2,0,True,A|A,2,0,True
+arc-0042,C,"What is the mass of a carbon atom that has 6 protons, 7 neutrons, and 6 electrons?",C|C,2,0,True,C|C,2,0,True
+arc-0043,D,The speed of a sound wave varies as it travels through different substances. Which factor will most affect the speed of a sound wave?,D|D,2,0,True,D|D,2,0,True
+arc-0044,2,"Which statement best describes the energy changes that occur while a child is riding on a sled down a steep, snow-covered hill?
+1. Kinetic energy decreases and potential energy increases.
+2. Kinetic energy increases and potential energy decreases.
+3. Both potential energy and kinetic energy decrease.
+4. Both potential energy and kinetic energy increase.",NULL|NULL,0,2,False,NULL|NULL,0,2,False
+arc-0045,B,The best way to separate salt from water is with the use of,B|B,2,0,True,B|B,2,0,True
+arc-0046,C,Which is the best piece of equipment to determine the topography of the United States?,C|C,2,0,True,C|C,2,0,True
+arc-0047,C,Which tool would be best to use to determine how long it takes a cup of water to boil?,C|C,2,0,True,C|C,2,0,True
+arc-0048,C,"To determine how closely related organisms are, scientists consider all of the following except",C|C,2,0,True,C|C,2,0,True
+arc-0049,A,Which is an example of a learned behavior?,A|A,2,0,True,A|A,2,0,True
+arc-0050,D,Suppose 20 g of liquid hydrogen peroxide is heated so it completely breaks down into liquid water and oxygen gas. Which best describes the total mass of the water and oxygen that was produced?,D|D,2,0,True,D|D,2,0,True
+arc-0051,C,"Air has no color and cannot be seen, yet it takes up space. What could be done to show that air takes up space?",C|C,2,0,True,C|C,2,0,True
+arc-0052,A,Which geologic process most likely caused the formation of the Mount St. Helens Volcano?,A|A,2,0,True,A|A,2,0,True
+arc-0053,C,Which example shows a relationship between a living thing and a nonliving thing?,C|C,2,0,True,C|C,2,0,True
+arc-0054,C,"Images from the Voyager and the Galileo spacecraft provide evidence Europa has a liquid ocean under a surface of ice that results in part from distinctive, surface-cracking patterns produced by which events?",B|B,0,0,True,B|B,0,0,True
+arc-0055,B,"All natural resources on Earth are either renewable or nonrenewable. Whether a resource is renewable or nonrenewable depends on how fast or slow the resource is replaced. If the resource is used faster than it is replaced, then the resource will, in time, disappear. Which activity shows the use of a nonrenewable natural resource?",B|B,2,0,True,B|B,2,0,True
+arc-0056,C,"Scientists studied largemouth bass populations in several different geographic locations. They recorded information about the size, number, and weight of fish in each population. Which of the following will be best suited for recording these data?",C|C,2,0,True,C|C,2,0,True
+arc-0057,A,A bar magnet was moved quickly back and forth in a coil of copper wire. The ends of the wire were connected to a small lightbulb. Which of the following was the device created for?,A|A,2,0,True,A|A,2,0,True
+arc-0058,A,Which of the following traits is most influenced by the environment?,A|A,2,0,True,A|A,2,0,True
+arc-0059,C,"Which of the following actions will increase the gravitational force between two masses, m_{1} and m_{2}, by the greatest amount?",C|C,2,0,True,C|C,2,0,True
+arc-0060,D,What are the products in the reaction shown below? HCl + NaOH ->,D|D,2,0,True,D|D,2,0,True
+arc-0061,B,Why do most of the leaves of forest trees grow at the top of the tree?,B|B,2,0,True,B|B,2,0,True
+arc-0062,D,"The terms gas exchange, diaphragm, and inhale are most closely associated with which system in the human body?",D|D,2,0,True,D|D,2,0,True
+arc-0063,C,Which of the following organs in fish has the same function as the human lung?,C|C,2,0,True,C|C,2,0,True
+arc-0064,D,Dominic is observing a volvox colony and a paramecium under a microscope. He makes a note in his journal that the volvox colony and the paramecium are similar because they have many organelles for movement. What would Dominic most likely notice about the movement of a volvox colony and a paramecium?,D|NULL,1,1,False,D|D,2,0,True
+arc-0065,A,Why does sexual reproduction result in more genetic diversity than asexual reproduction?,A|A,2,0,True,A|A,2,0,True
+arc-0066,A,Some students are performing hardness tests on several substances. X scratches Y. Y scratches Z. Z scratches W. Which of these statements best describes substance W's hardness?,A|A,2,0,True,A|A,2,0,True
+arc-0067,C,"Scientists have studied the productivity of crops in mountain valleys. In some areas, the valleys are more productive than others. The increase in which factor most likely accounts for the high productivity of some areas in mountain valleys?",D|D,0,0,True,D|D,0,0,True
+arc-0068,B,The salt in ocean water comes from all of the following except,B|B,2,0,True,B|B,2,0,True
+arc-0069,A,What is the primary cause of rainstorms?,A|A,2,0,True,A|A,2,0,True
+arc-0070,A,"Garden plants on Earth require four resources to stay alive: soil, air, water, and sunlight. How many of these resources are necessary for life to exist on the moon or another planet?",NULL|D,0,1,False,NULL|D,0,1,False
+arc-0071,C,Which is most useful to a student who is separating aluminum screws from steel screws?,C|C,2,0,True,C|C,2,0,True
+arc-0072,B,"Some scientists predict that as greenhouse gases change the climate of Earth, the number and strength of hurricanes will increase. In order for this to occur, the climate change would have to affect Earth by changing the",NULL|C,0,1,False,NULL|NULL,0,2,False
+arc-0073,D,"Over a long period of time, running water in a river erodes the riverbed. This erosion causes the river to",D|D,2,0,True,D|D,2,0,True
+arc-0074,D,Which best explains what scientists are referring to when they use the term conservation?,D|D,2,0,True,D|D,2,0,True
+arc-0075,A,Which objects in our solar system give off their own light?,A|A,2,0,True,A|A,2,0,True
+arc-0076,B,"A student examined diagrams of two different cells. One cell was prokaryotic, and the other cell was eukaryotic. What should the student do to identify a major difference between the diagrams?",B|B,2,0,True,B|B,2,0,True
+arc-0077,B,Under which circumstance would an adaptation that shortens the time of a tadpole's metamorphosis be most useful?,B|B,2,0,True,B|B,2,0,True
+arc-0078,B,A 20 N object is placed on a surface and starts to slide. What is the most likely reason the object begins to move?,B|B,2,0,True,B|B,2,0,True
+arc-0079,A,Which items would take the least amount of time to decompose in nature?,A|A,2,0,True,A|A,2,0,True
+arc-0080,D,Which process in the carbon cycle takes the longest to complete?,D|D,2,0,True,D|D,2,0,True
+arc-0081,C,Some marine organisms living deep in the ocean can produce their own light. The light they produce is most likely used for which of these activities?,C|C,2,0,True,C|C,2,0,True
+arc-0082,C,"When the temperature of a sample of 25 water is -5°C, the water is",C|C,2,0,True,C|C,2,0,True
+arc-0083,D,Thomas Edison most likely invented the light bulb by using,D|D,2,0,True,D|D,2,0,True
+arc-0084,D,A student investigates the effects of fertilizer on corn plants by performing the following steps.1. Plant groups of corn plants in the same type and amount of soil in full sunlight.2. Add the same amount of different brands of fertilizer to each group.3. Water the plants for 5 minutes each day.4. Measure the heights of the plants each day. What is the independent variable in this investigation?,D|D,2,0,True,D|D,2,0,True
+arc-0085,A,The period of rotation for each planet in our solar system is different. The period of rotation for Earth is,A|A,2,0,True,A|A,2,0,True
+arc-0086,A,"As early as the 1600s, scientists noticed that the continents appeared to fit together like pieces of a puzzle. The idea that the continents were once together and had drifted apart was not widely accepted. In the 1940s, technology used on submarines led to evidence of continental movement. This technology allowed the scientists to do which of these?",A|A,2,0,True,A|A,2,0,True
+arc-0087,D,Which of the following statements is a scientific hypothesis?,D|D,2,0,True,D|D,2,0,True
+arc-0088,C,A pitcher throws a 0.15 kg baseball at 43 40 m/s towards the catcher. What is the momentum of the baseball while moving at 40 m/s?,C|C,2,0,True,C|C,2,0,True
+arc-0089,C,Which action explains how a somatic cell mutation can harm an organism?,C|C,2,0,True,C|C,2,0,True
+arc-0090,A,What can most likely be seen without the aid of a telescope on a clear night?,A|A,2,0,True,A|A,2,0,True
+arc-0091,D,The stem is an important part of many plants. Which of the following is most similar to the role performed by the stem of a plant?,D|D,2,0,True,D|D,2,0,True
+arc-0092,D,"Students shake salt into a jar of water, and they shake pepper into a second jar of water. Which statement best compares the two jars?",D|D,2,0,True,D|D,2,0,True
+arc-0093,A,The students in a class would like to make 20 paper sailboats for a race. The students will select one design and collect the materials they need to construct the boats. Which of the following is the best way for the students to be sure the paper sailboats will float without tipping over in the water?,A|A,2,0,True,A|A,2,0,True
+arc-0094,B,A carbon monoxide detector is used in homes to,B|B,2,0,True,B|B,2,0,True
+arc-0095,C,Gases can be easily compressed and are able to expand to fill their containers. These descriptions of gases are examples of,C|C,2,0,True,C|C,2,0,True
+arc-0096,C,Experiments show that mice can learn to press a lever in order to acquire food. This learning ability can help mice survive in the wild by allowing them to,C|C,2,0,True,C|C,2,0,True
+arc-0097,B,How are sedimentary rocks made?,B|B,2,0,True,B|B,2,0,True
+arc-0098,B,Which structures are common to both plant and animal cells?,B|B,2,0,True,B|B,2,0,True
+arc-0099,B,A polished metal ball looks very shiny and bright on a sunny day. What makes the ball look shiny?,B|B,2,0,True,B|B,2,0,True

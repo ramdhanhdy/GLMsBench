@@ -1,0 +1,942 @@
+{
+  "source_results": "/opt/data/GLMsBench/results/arc-n100-clean-max1200-20260702T164929Z/raw/results.json",
+  "n_requests": 400,
+  "providers": [
+    "umans",
+    "zai"
+  ],
+  "suites": [
+    "arc"
+  ],
+  "provider_summary": {
+    "umans": {
+      "requests": 200,
+      "ok_requests": 200,
+      "error_requests": 0,
+      "input_tokens": {
+        "n": 200,
+        "min": 63.0,
+        "max": 164.0,
+        "mean": 98.77,
+        "median": 93.5,
+        "p95": 146.09999999999997
+      },
+      "output_tokens": {
+        "n": 200,
+        "min": 60.0,
+        "max": 1200.0,
+        "mean": 221.98,
+        "median": 146.5,
+        "p95": 702.2999999999975
+      },
+      "total_tokens": {
+        "n": 200,
+        "min": 128.0,
+        "max": 1343.0,
+        "mean": 320.75,
+        "median": 244.0,
+        "p95": 842.3999999999985
+      },
+      "ttft_ms": {
+        "n": 195,
+        "min": 1453.0133111402392,
+        "max": 206091.2041645497,
+        "mean": 24210.239635178677,
+        "median": 12824.296428821981,
+        "p95": 76506.58153463145
+      },
+      "e2e_ms": {
+        "n": 200,
+        "min": 1453.19608412683,
+        "max": 206091.234841384,
+        "mean": 24582.494919868186,
+        "median": 13669.91679277271,
+        "p95": 75093.9967968966
+      },
+      "inter_token_latency_ms": {
+        "n": 0,
+        "min": null,
+        "max": null,
+        "mean": null,
+        "median": null,
+        "p95": null
+      },
+      "throttled_events": 0,
+      "backoff_ms": 0.0,
+      "avg_attempts": 1.0
+    },
+    "zai": {
+      "requests": 200,
+      "ok_requests": 200,
+      "error_requests": 0,
+      "input_tokens": {
+        "n": 200,
+        "min": 63.0,
+        "max": 164.0,
+        "mean": 98.77,
+        "median": 93.5,
+        "p95": 146.09999999999997
+      },
+      "output_tokens": {
+        "n": 200,
+        "min": 56.0,
+        "max": 1200.0,
+        "mean": 195.505,
+        "median": 141.0,
+        "p95": 522.05
+      },
+      "total_tokens": {
+        "n": 200,
+        "min": 124.0,
+        "max": 1310.0,
+        "mean": 294.275,
+        "median": 238.0,
+        "p95": 612.6499999999992
+      },
+      "ttft_ms": {
+        "n": 197,
+        "min": 2165.7489957287908,
+        "max": 31616.509396582842,
+        "mean": 6141.845193412628,
+        "median": 5662.1383260935545,
+        "p95": 11358.614523895083
+      },
+      "e2e_ms": {
+        "n": 200,
+        "min": 2165.7817978411913,
+        "max": 31616.534852422774,
+        "mean": 6454.893261361867,
+        "median": 5772.295113652945,
+        "p95": 12594.260453665614
+      },
+      "inter_token_latency_ms": {
+        "n": 3,
+        "min": 0.002427026629447937,
+        "max": 0.0034403055906295776,
+        "mean": 0.002869094411532084,
+        "median": 0.002739951014518738,
+        "p95": 0.0033702701330184937
+      },
+      "throttled_events": 0,
+      "backoff_ms": 0.0,
+      "avg_attempts": 1.0
+    }
+  },
+  "parity_summary": {
+    "arc": {
+      "providers": [
+        "umans",
+        "zai"
+      ],
+      "n_compared": 100,
+      "canonical_disagreements": 0,
+      "canonical_unknown": 4,
+      "canonical_disagreement_rate": 0.0,
+      "raw_text_agreements": 96,
+      "raw_text_agreement_rate": 0.96,
+      "pairs": [
+        {
+          "suite": "arc",
+          "item_id": "arc-0000",
+          "umans_answer": "C",
+          "zai_answer": "C",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0001",
+          "umans_answer": "B",
+          "zai_answer": "B",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0002",
+          "umans_answer": "C",
+          "zai_answer": "C",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0003",
+          "umans_answer": "D",
+          "zai_answer": "D",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0004",
+          "umans_answer": "D",
+          "zai_answer": "D",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0005",
+          "umans_answer": "B",
+          "zai_answer": "B",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0006",
+          "umans_answer": "C",
+          "zai_answer": "C",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0007",
+          "umans_answer": "C",
+          "zai_answer": "C",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0008",
+          "umans_answer": "B",
+          "zai_answer": "B",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0009",
+          "umans_answer": "A",
+          "zai_answer": "A",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0010",
+          "umans_answer": "B",
+          "zai_answer": "B",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0011",
+          "umans_answer": "A",
+          "zai_answer": "A",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0012",
+          "umans_answer": "C",
+          "zai_answer": "C",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0013",
+          "umans_answer": "C",
+          "zai_answer": "C",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0014",
+          "umans_answer": "C",
+          "zai_answer": "C",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0015",
+          "umans_answer": "A",
+          "zai_answer": "A",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0016",
+          "umans_answer": "C",
+          "zai_answer": "C",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0017",
+          "umans_answer": "B",
+          "zai_answer": "B",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0018",
+          "umans_answer": "A",
+          "zai_answer": "A",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0019",
+          "umans_answer": "C",
+          "zai_answer": "C",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0020",
+          "umans_answer": "B",
+          "zai_answer": "B",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0021",
+          "umans_answer": "B",
+          "zai_answer": "B",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0022",
+          "umans_answer": "A",
+          "zai_answer": "A",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0023",
+          "umans_answer": "C",
+          "zai_answer": "C",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0024",
+          "umans_answer": "B",
+          "zai_answer": "B",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0025",
+          "umans_answer": "D",
+          "zai_answer": "D",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0026",
+          "umans_answer": "B",
+          "zai_answer": "B",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0027",
+          "umans_answer": "B",
+          "zai_answer": "B",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0028",
+          "umans_answer": "C",
+          "zai_answer": "C",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0029",
+          "umans_answer": "B",
+          "zai_answer": "B",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0030",
+          "umans_answer": "D",
+          "zai_answer": "D",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0031",
+          "umans_answer": "C",
+          "zai_answer": "C",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0032",
+          "umans_answer": "A",
+          "zai_answer": "A",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0033",
+          "umans_answer": "C",
+          "zai_answer": "C",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0034",
+          "umans_answer": "A",
+          "zai_answer": "A",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0035",
+          "umans_answer": null,
+          "zai_answer": "A",
+          "canonical_agree": false,
+          "canonical_unknown": true
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0036",
+          "umans_answer": "B",
+          "zai_answer": "B",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0037",
+          "umans_answer": "B",
+          "zai_answer": "B",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0038",
+          "umans_answer": "C",
+          "zai_answer": "C",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0039",
+          "umans_answer": "B",
+          "zai_answer": "B",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0040",
+          "umans_answer": "C",
+          "zai_answer": "C",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0041",
+          "umans_answer": "A",
+          "zai_answer": "A",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0042",
+          "umans_answer": "C",
+          "zai_answer": "C",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0043",
+          "umans_answer": "D",
+          "zai_answer": "D",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0044",
+          "umans_answer": null,
+          "zai_answer": null,
+          "canonical_agree": false,
+          "canonical_unknown": true
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0045",
+          "umans_answer": "B",
+          "zai_answer": "B",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0046",
+          "umans_answer": "C",
+          "zai_answer": "C",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0047",
+          "umans_answer": "C",
+          "zai_answer": "C",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0048",
+          "umans_answer": "C",
+          "zai_answer": "C",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0049",
+          "umans_answer": "A",
+          "zai_answer": "A",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0050",
+          "umans_answer": "D",
+          "zai_answer": "D",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0051",
+          "umans_answer": "C",
+          "zai_answer": "C",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0052",
+          "umans_answer": "A",
+          "zai_answer": "A",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0053",
+          "umans_answer": "C",
+          "zai_answer": "C",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0054",
+          "umans_answer": "B",
+          "zai_answer": "B",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0055",
+          "umans_answer": "B",
+          "zai_answer": "B",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0056",
+          "umans_answer": "C",
+          "zai_answer": "C",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0057",
+          "umans_answer": "A",
+          "zai_answer": "A",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0058",
+          "umans_answer": "A",
+          "zai_answer": "A",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0059",
+          "umans_answer": "C",
+          "zai_answer": "C",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0060",
+          "umans_answer": "D",
+          "zai_answer": "D",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0061",
+          "umans_answer": "B",
+          "zai_answer": "B",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0062",
+          "umans_answer": "D",
+          "zai_answer": "D",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0063",
+          "umans_answer": "C",
+          "zai_answer": "C",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0064",
+          "umans_answer": "D",
+          "zai_answer": "D",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0065",
+          "umans_answer": "A",
+          "zai_answer": "A",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0066",
+          "umans_answer": "A",
+          "zai_answer": "A",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0067",
+          "umans_answer": "D",
+          "zai_answer": "D",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0068",
+          "umans_answer": "B",
+          "zai_answer": "B",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0069",
+          "umans_answer": "A",
+          "zai_answer": "A",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0070",
+          "umans_answer": null,
+          "zai_answer": "D",
+          "canonical_agree": false,
+          "canonical_unknown": true
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0071",
+          "umans_answer": "C",
+          "zai_answer": "C",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0072",
+          "umans_answer": null,
+          "zai_answer": null,
+          "canonical_agree": false,
+          "canonical_unknown": true
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0073",
+          "umans_answer": "D",
+          "zai_answer": "D",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0074",
+          "umans_answer": "D",
+          "zai_answer": "D",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0075",
+          "umans_answer": "A",
+          "zai_answer": "A",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0076",
+          "umans_answer": "B",
+          "zai_answer": "B",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0077",
+          "umans_answer": "B",
+          "zai_answer": "B",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0078",
+          "umans_answer": "B",
+          "zai_answer": "B",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0079",
+          "umans_answer": "A",
+          "zai_answer": "A",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0080",
+          "umans_answer": "D",
+          "zai_answer": "D",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0081",
+          "umans_answer": "C",
+          "zai_answer": "C",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0082",
+          "umans_answer": "C",
+          "zai_answer": "C",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0083",
+          "umans_answer": "D",
+          "zai_answer": "D",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0084",
+          "umans_answer": "D",
+          "zai_answer": "D",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0085",
+          "umans_answer": "A",
+          "zai_answer": "A",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0086",
+          "umans_answer": "A",
+          "zai_answer": "A",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0087",
+          "umans_answer": "D",
+          "zai_answer": "D",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0088",
+          "umans_answer": "C",
+          "zai_answer": "C",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0089",
+          "umans_answer": "C",
+          "zai_answer": "C",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0090",
+          "umans_answer": "A",
+          "zai_answer": "A",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0091",
+          "umans_answer": "D",
+          "zai_answer": "D",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0092",
+          "umans_answer": "D",
+          "zai_answer": "D",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0093",
+          "umans_answer": "A",
+          "zai_answer": "A",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0094",
+          "umans_answer": "B",
+          "zai_answer": "B",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0095",
+          "umans_answer": "C",
+          "zai_answer": "C",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0096",
+          "umans_answer": "C",
+          "zai_answer": "C",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0097",
+          "umans_answer": "B",
+          "zai_answer": "B",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0098",
+          "umans_answer": "B",
+          "zai_answer": "B",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        },
+        {
+          "suite": "arc",
+          "item_id": "arc-0099",
+          "umans_answer": "B",
+          "zai_answer": "B",
+          "canonical_agree": true,
+          "canonical_unknown": false
+        }
+      ]
+    }
+  },
+  "upstream_aggregates": {}
+}
