@@ -1,0 +1,500 @@
+﻿{
+  "run_meta": {
+    "config": {
+      "model": "glm-5.2",
+      "providers": [
+        "zai",
+        "umans"
+      ]
+    },
+    "generated_at": "2026-07-01T09:53:55.455164+00:00",
+    "n_requests": 12
+  },
+  "aggregates": {
+    "by_suite": {
+      "arc": {
+        "umans": {
+          "latency": {
+            "clean": {
+              "ttft_ms": {
+                "n": 3,
+                "median": 4250.0,
+                "min": 4250.0,
+                "max": 16375.0,
+                "p95": 15162.499999999998
+              },
+              "inter_token_latency_ms": {
+                "n": 0,
+                "median": null,
+                "min": null,
+                "max": null,
+                "p95": null
+              },
+              "e2e_ms": {
+                "n": 3,
+                "median": 4280.999999959022,
+                "min": 4250.0,
+                "max": 16375.0,
+                "p95": 15165.5999999959
+              },
+              "n": 3
+            },
+            "effective": {
+              "ttft_ms": {
+                "n": 3,
+                "median": 4250.0,
+                "min": 4250.0,
+                "max": 16375.0,
+                "p95": 15162.499999999998
+              },
+              "inter_token_latency_ms": {
+                "n": 0,
+                "median": null,
+                "min": null,
+                "max": null,
+                "p95": null
+              },
+              "e2e_ms": {
+                "n": 3,
+                "median": 4280.999999959022,
+                "min": 4250.0,
+                "max": 16375.0,
+                "p95": 15165.5999999959
+              },
+              "n": 3
+            }
+          }
+        },
+        "zai": {
+          "latency": {
+            "clean": {
+              "ttft_ms": {
+                "n": 3,
+                "median": 4952.999999979511,
+                "min": 4015.00000001397,
+                "max": 7000.0,
+                "p95": 6795.299999997951
+              },
+              "inter_token_latency_ms": {
+                "n": 0,
+                "median": null,
+                "min": null,
+                "max": null,
+                "p95": null
+              },
+              "e2e_ms": {
+                "n": 3,
+                "median": 4952.999999979511,
+                "min": 4015.00000001397,
+                "max": 7000.0,
+                "p95": 6795.299999997951
+              },
+              "n": 3
+            },
+            "effective": {
+              "ttft_ms": {
+                "n": 3,
+                "median": 4952.999999979511,
+                "min": 4015.00000001397,
+                "max": 7000.0,
+                "p95": 6795.299999997951
+              },
+              "inter_token_latency_ms": {
+                "n": 0,
+                "median": null,
+                "min": null,
+                "max": null,
+                "p95": null
+              },
+              "e2e_ms": {
+                "n": 3,
+                "median": 4952.999999979511,
+                "min": 4015.00000001397,
+                "max": 7000.0,
+                "p95": 6795.299999997951
+              },
+              "n": 3
+            }
+          }
+        },
+        "parity": {
+          "n_compared": 3,
+          "raw_text_agreement_rate": 1.0,
+          "canonical_disagreement_rate": 0.0
+        }
+      }
+    },
+    "cost": {
+      "umans": 0.0,
+      "zai": 0.0
+    },
+    "cost_by_tier": {
+      "usage_tiers": {
+        "early_setup": {
+          "tokens_per_day_min": 50000000.0,
+          "tokens_per_day_max": 90000000.0
+        },
+        "maximized": {
+          "tokens_per_day_min": 100000000.0,
+          "tokens_per_day_max": 300000000.0
+        }
+      },
+      "providers": {
+        "zai": {
+          "mode": "subscription",
+          "monthly_usd": 16.0,
+          "effective_usd_per_million_by_tier": {
+            "early_setup": {
+              "low_usage_usd_per_million": 0.010666666666666666,
+              "high_usage_usd_per_million": 0.005925925925925926
+            },
+            "maximized": {
+              "low_usage_usd_per_million": 0.005333333333333333,
+              "high_usage_usd_per_million": 0.0017777777777777779
+            }
+          }
+        },
+        "umans": {
+          "mode": "subscription",
+          "monthly_usd": 50.0,
+          "effective_usd_per_million_by_tier": {
+            "early_setup": {
+              "low_usage_usd_per_million": 0.03333333333333333,
+              "high_usage_usd_per_million": 0.018518518518518517
+            },
+            "maximized": {
+              "low_usage_usd_per_million": 0.016666666666666666,
+              "high_usage_usd_per_million": 0.005555555555555556
+            }
+          }
+        }
+      }
+    }
+  },
+  "requests": [
+    {
+      "provider": "zai",
+      "suite": "arc",
+      "item_id": "arc-0000",
+      "pass_type": "parity",
+      "pass_index": 0,
+      "prompt": "Answer the following multiple-choice question. Respond with only the letter (A, B, C, D).\n\nAn astronomer observes that a planet rotates faster after a meteorite impact. Which is the most likely effect of this increase in rotation?\nA. Planetary density will decrease.\nB. Planetary years will become longer.\nC. Planetary days will become shorter.\nD. Planetary gravity will become stronger.\n\nAnswer:",
+      "output": "C",
+      "timing": {
+        "ttft_ms": 5421.999999904074,
+        "inter_token_latency_ms": null,
+        "e2e_ms": 5421.999999904074,
+        "output_tokens": 171,
+        "input_tokens": 97,
+        "reasoning_tokens": 168,
+        "stop_reason": "stop"
+      },
+      "rate": {
+        "n_attempts": 1,
+        "n_throttled": 0,
+        "total_backoff_ms": 0.0,
+        "had_backoff": false
+      },
+      "cost_usd": null,
+      "http_status": 200,
+      "error": null
+    },
+    {
+      "provider": "zai",
+      "suite": "arc",
+      "item_id": "arc-0000",
+      "pass_type": "latency",
+      "pass_index": 0,
+      "prompt": "Answer the following multiple-choice question. Respond with only the letter (A, B, C, D).\n\nAn astronomer observes that a planet rotates faster after a meteorite impact. Which is the most likely effect of this increase in rotation?\nA. Planetary density will decrease.\nB. Planetary years will become longer.\nC. Planetary days will become shorter.\nD. Planetary gravity will become stronger.\n\nAnswer:",
+      "output": "C",
+      "timing": {
+        "ttft_ms": 4015.00000001397,
+        "inter_token_latency_ms": null,
+        "e2e_ms": 4015.00000001397,
+        "output_tokens": 159,
+        "input_tokens": 97,
+        "reasoning_tokens": 156,
+        "stop_reason": "stop"
+      },
+      "rate": {
+        "n_attempts": 1,
+        "n_throttled": 0,
+        "total_backoff_ms": 0.0,
+        "had_backoff": false
+      },
+      "cost_usd": null,
+      "http_status": 200,
+      "error": null
+    },
+    {
+      "provider": "zai",
+      "suite": "arc",
+      "item_id": "arc-0001",
+      "pass_type": "parity",
+      "pass_index": 0,
+      "prompt": "Answer the following multiple-choice question. Respond with only the letter (A, B, C, D).\n\nA group of engineers wanted to know how different building designs would respond during an earthquake. They made several models of buildings and tested each for its ability to withstand earthquake conditions. Which will most likely result from testing different building designs?\nA. buildings will be built faster\nB. buildings will be made safer\nC. building designs will look nicer\nD. building materials will be cheaper\n\nAnswer:",
+      "output": "B",
+      "timing": {
+        "ttft_ms": 6297.000000020489,
+        "inter_token_latency_ms": null,
+        "e2e_ms": 6297.000000020489,
+        "output_tokens": 105,
+        "input_tokens": 112,
+        "reasoning_tokens": 102,
+        "stop_reason": "stop"
+      },
+      "rate": {
+        "n_attempts": 1,
+        "n_throttled": 0,
+        "total_backoff_ms": 0.0,
+        "had_backoff": false
+      },
+      "cost_usd": null,
+      "http_status": 200,
+      "error": null
+    },
+    {
+      "provider": "zai",
+      "suite": "arc",
+      "item_id": "arc-0001",
+      "pass_type": "latency",
+      "pass_index": 0,
+      "prompt": "Answer the following multiple-choice question. Respond with only the letter (A, B, C, D).\n\nA group of engineers wanted to know how different building designs would respond during an earthquake. They made several models of buildings and tested each for its ability to withstand earthquake conditions. Which will most likely result from testing different building designs?\nA. buildings will be built faster\nB. buildings will be made safer\nC. building designs will look nicer\nD. building materials will be cheaper\n\nAnswer:",
+      "output": "B",
+      "timing": {
+        "ttft_ms": 7000.0,
+        "inter_token_latency_ms": null,
+        "e2e_ms": 7000.0,
+        "output_tokens": 113,
+        "input_tokens": 112,
+        "reasoning_tokens": 110,
+        "stop_reason": "stop"
+      },
+      "rate": {
+        "n_attempts": 1,
+        "n_throttled": 0,
+        "total_backoff_ms": 0.0,
+        "had_backoff": false
+      },
+      "cost_usd": null,
+      "http_status": 200,
+      "error": null
+    },
+    {
+      "provider": "zai",
+      "suite": "arc",
+      "item_id": "arc-0002",
+      "pass_type": "parity",
+      "pass_index": 0,
+      "prompt": "Answer the following multiple-choice question. Respond with only the letter (A, B, C, D).\n\nThe end result in the process of photosynthesis is the production of sugar and oxygen. Which step signals the beginning of photosynthesis?\nA. Chemical energy is absorbed through the roots.\nB. Light energy is converted to chemical energy.\nC. Chlorophyll in the leaf captures light energy.\nD. Sunlight is converted into chlorophyll.\n\nAnswer:",
+      "output": "C",
+      "timing": {
+        "ttft_ms": 6375.0,
+        "inter_token_latency_ms": null,
+        "e2e_ms": 6375.0,
+        "output_tokens": 188,
+        "input_tokens": 104,
+        "reasoning_tokens": 183,
+        "stop_reason": "stop"
+      },
+      "rate": {
+        "n_attempts": 1,
+        "n_throttled": 0,
+        "total_backoff_ms": 0.0,
+        "had_backoff": false
+      },
+      "cost_usd": null,
+      "http_status": 200,
+      "error": null
+    },
+    {
+      "provider": "zai",
+      "suite": "arc",
+      "item_id": "arc-0002",
+      "pass_type": "latency",
+      "pass_index": 0,
+      "prompt": "Answer the following multiple-choice question. Respond with only the letter (A, B, C, D).\n\nThe end result in the process of photosynthesis is the production of sugar and oxygen. Which step signals the beginning of photosynthesis?\nA. Chemical energy is absorbed through the roots.\nB. Light energy is converted to chemical energy.\nC. Chlorophyll in the leaf captures light energy.\nD. Sunlight is converted into chlorophyll.\n\nAnswer:",
+      "output": "C",
+      "timing": {
+        "ttft_ms": 4952.999999979511,
+        "inter_token_latency_ms": null,
+        "e2e_ms": 4952.999999979511,
+        "output_tokens": 148,
+        "input_tokens": 104,
+        "reasoning_tokens": 145,
+        "stop_reason": "stop"
+      },
+      "rate": {
+        "n_attempts": 1,
+        "n_throttled": 0,
+        "total_backoff_ms": 0.0,
+        "had_backoff": false
+      },
+      "cost_usd": null,
+      "http_status": 200,
+      "error": null
+    },
+    {
+      "provider": "umans",
+      "suite": "arc",
+      "item_id": "arc-0000",
+      "pass_type": "parity",
+      "pass_index": 0,
+      "prompt": "Answer the following multiple-choice question. Respond with only the letter (A, B, C, D).\n\nAn astronomer observes that a planet rotates faster after a meteorite impact. Which is the most likely effect of this increase in rotation?\nA. Planetary density will decrease.\nB. Planetary years will become longer.\nC. Planetary days will become shorter.\nD. Planetary gravity will become stronger.\n\nAnswer:",
+      "output": "C",
+      "timing": {
+        "ttft_ms": 4312.000000034459,
+        "inter_token_latency_ms": null,
+        "e2e_ms": 4312.000000034459,
+        "output_tokens": 184,
+        "input_tokens": 97,
+        "reasoning_tokens": 182,
+        "stop_reason": "stop"
+      },
+      "rate": {
+        "n_attempts": 1,
+        "n_throttled": 0,
+        "total_backoff_ms": 0.0,
+        "had_backoff": false
+      },
+      "cost_usd": null,
+      "http_status": 200,
+      "error": null
+    },
+    {
+      "provider": "umans",
+      "suite": "arc",
+      "item_id": "arc-0000",
+      "pass_type": "latency",
+      "pass_index": 0,
+      "prompt": "Answer the following multiple-choice question. Respond with only the letter (A, B, C, D).\n\nAn astronomer observes that a planet rotates faster after a meteorite impact. Which is the most likely effect of this increase in rotation?\nA. Planetary density will decrease.\nB. Planetary years will become longer.\nC. Planetary days will become shorter.\nD. Planetary gravity will become stronger.\n\nAnswer:",
+      "output": "C",
+      "timing": {
+        "ttft_ms": 4250.0,
+        "inter_token_latency_ms": null,
+        "e2e_ms": 4280.999999959022,
+        "output_tokens": 130,
+        "input_tokens": 97,
+        "reasoning_tokens": 128,
+        "stop_reason": "stop"
+      },
+      "rate": {
+        "n_attempts": 1,
+        "n_throttled": 0,
+        "total_backoff_ms": 0.0,
+        "had_backoff": false
+      },
+      "cost_usd": null,
+      "http_status": 200,
+      "error": null
+    },
+    {
+      "provider": "umans",
+      "suite": "arc",
+      "item_id": "arc-0001",
+      "pass_type": "parity",
+      "pass_index": 0,
+      "prompt": "Answer the following multiple-choice question. Respond with only the letter (A, B, C, D).\n\nA group of engineers wanted to know how different building designs would respond during an earthquake. They made several models of buildings and tested each for its ability to withstand earthquake conditions. Which will most likely result from testing different building designs?\nA. buildings will be built faster\nB. buildings will be made safer\nC. building designs will look nicer\nD. building materials will be cheaper\n\nAnswer:",
+      "output": "B",
+      "timing": {
+        "ttft_ms": 4515.00000001397,
+        "inter_token_latency_ms": null,
+        "e2e_ms": 4515.00000001397,
+        "output_tokens": 113,
+        "input_tokens": 112,
+        "reasoning_tokens": 111,
+        "stop_reason": "stop"
+      },
+      "rate": {
+        "n_attempts": 1,
+        "n_throttled": 0,
+        "total_backoff_ms": 0.0,
+        "had_backoff": false
+      },
+      "cost_usd": null,
+      "http_status": 200,
+      "error": null
+    },
+    {
+      "provider": "umans",
+      "suite": "arc",
+      "item_id": "arc-0001",
+      "pass_type": "latency",
+      "pass_index": 0,
+      "prompt": "Answer the following multiple-choice question. Respond with only the letter (A, B, C, D).\n\nA group of engineers wanted to know how different building designs would respond during an earthquake. They made several models of buildings and tested each for its ability to withstand earthquake conditions. Which will most likely result from testing different building designs?\nA. buildings will be built faster\nB. buildings will be made safer\nC. building designs will look nicer\nD. building materials will be cheaper\n\nAnswer:",
+      "output": "B",
+      "timing": {
+        "ttft_ms": 4250.0,
+        "inter_token_latency_ms": null,
+        "e2e_ms": 4250.0,
+        "output_tokens": 117,
+        "input_tokens": 112,
+        "reasoning_tokens": 115,
+        "stop_reason": "stop"
+      },
+      "rate": {
+        "n_attempts": 1,
+        "n_throttled": 0,
+        "total_backoff_ms": 0.0,
+        "had_backoff": false
+      },
+      "cost_usd": null,
+      "http_status": 200,
+      "error": null
+    },
+    {
+      "provider": "umans",
+      "suite": "arc",
+      "item_id": "arc-0002",
+      "pass_type": "parity",
+      "pass_index": 0,
+      "prompt": "Answer the following multiple-choice question. Respond with only the letter (A, B, C, D).\n\nThe end result in the process of photosynthesis is the production of sugar and oxygen. Which step signals the beginning of photosynthesis?\nA. Chemical energy is absorbed through the roots.\nB. Light energy is converted to chemical energy.\nC. Chlorophyll in the leaf captures light energy.\nD. Sunlight is converted into chlorophyll.\n\nAnswer:",
+      "output": "C",
+      "timing": {
+        "ttft_ms": 15920.999999972992,
+        "inter_token_latency_ms": null,
+        "e2e_ms": 16375.0,
+        "output_tokens": 175,
+        "input_tokens": 104,
+        "reasoning_tokens": 173,
+        "stop_reason": "stop"
+      },
+      "rate": {
+        "n_attempts": 1,
+        "n_throttled": 0,
+        "total_backoff_ms": 0.0,
+        "had_backoff": false
+      },
+      "cost_usd": null,
+      "http_status": 200,
+      "error": null
+    },
+    {
+      "provider": "umans",
+      "suite": "arc",
+      "item_id": "arc-0002",
+      "pass_type": "latency",
+      "pass_index": 0,
+      "prompt": "Answer the following multiple-choice question. Respond with only the letter (A, B, C, D).\n\nThe end result in the process of photosynthesis is the production of sugar and oxygen. Which step signals the beginning of photosynthesis?\nA. Chemical energy is absorbed through the roots.\nB. Light energy is converted to chemical energy.\nC. Chlorophyll in the leaf captures light energy.\nD. Sunlight is converted into chlorophyll.\n\nAnswer:",
+      "output": "C",
+      "timing": {
+        "ttft_ms": 16375.0,
+        "inter_token_latency_ms": null,
+        "e2e_ms": 16375.0,
+        "output_tokens": 177,
+        "input_tokens": 104,
+        "reasoning_tokens": 175,
+        "stop_reason": "stop"
+      },
+      "rate": {
+        "n_attempts": 1,
+        "n_throttled": 0,
+        "total_backoff_ms": 0.0,
+        "had_backoff": false
+      },
+      "cost_usd": null,
+      "http_status": 200,
+      "error": null
+    }
+  ]
+}
