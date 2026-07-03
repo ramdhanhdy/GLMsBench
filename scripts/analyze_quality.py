@@ -77,6 +77,17 @@ def _infer_arc_n(records: list[dict[str, Any]]) -> int:
     return max_index + 1
 
 
+def _completion_budget_from_records(records: list[dict[str, Any]]) -> int | None:
+    values: list[float] = []
+    for record in records:
+        value = (record.get("timing") or {}).get("output_tokens")
+        if value is not None:
+            values.append(float(value))
+    if not values:
+        return None
+    return int(max(values))
+
+
 def _write_csv(path: Path, rows: list[dict[str, Any]]) -> None:
     if not rows:
         return
@@ -142,6 +153,7 @@ def analyze_quality(run_dir: Path) -> dict[str, Any]:
         "providers": providers,
         "n_requests": len(enriched),
         "n_items": len(gold),
+        "completion_budget_tokens": _completion_budget_from_records(enriched),
         "provider_quality": {},
         "item_summary": {},
         "gold_distribution": dict(sorted(Counter(gold.values()).items())),
@@ -152,7 +164,7 @@ def analyze_quality(run_dir: Path) -> dict[str, Any]:
             "Separate benchmark capability from provider reliability: correctness only among completed requests hides failed-request impact.",
             "Analyze hard items: list items missed by both providers, missed by only one provider, and unknown/non-letter outputs.",
             "Measure latency-quality coupling: compare latency/token counts for correct vs incorrect/unknown outputs.",
-            "Scale n beyond 30 because the current sample has high variance and answer-label imbalance.",
+            "Scale beyond the current sample when tighter confidence intervals are needed.",
             "Store dataset metadata (question, choices, gold, category) in raw results for reproducible audits without reloading HF.",
         ],
     }
@@ -267,8 +279,11 @@ def _write_quality_reports(out_dir: Path, summary: dict[str, Any], item_rows: li
     providers = summary["providers"]
     quality = summary["provider_quality"]
 
+    budget = summary.get("completion_budget_tokens")
+    budget_text = f"{budget}-token completion budget" if budget else "completion budget"
+
     lines: list[str] = []
-    lines.append("# GLMsBench ARC n=30 Quality Analysis")
+    lines.append(f"# GLMsBench ARC n={summary['n_items']} Quality Analysis")
     lines.append("")
     lines.append("This analysis joins provider outputs to ARC-Challenge gold labels through the existing `ARCLoader`. It covers correctness, parseability, item-level stability, and quality/latency coupling.")
     lines.append("")
@@ -323,14 +338,14 @@ def _write_quality_reports(out_dir: Path, summary: dict[str, Any], item_rows: li
     deep: list[str] = []
     deep.append("# Additional Quality Analysis: ARC Correctness and Failure Modes")
     deep.append("")
-    deep.append("This is a deeper read of the existing merged ARC n=30 data. It joins raw provider outputs with ARC gold labels and separates answer correctness from operational / generation failures.")
+    deep.append(f"This is a deeper read of the existing merged ARC n={summary['n_items']} data. It joins raw provider outputs with ARC gold labels and separates answer correctness from operational / generation failures.")
     deep.append("")
     deep.append("## Headline")
     deep.append("")
-    deep.append("- Among responses that produced a parseable answer, **both providers were 100% correct** on this small ARC sample.")
-    deep.append("- The observed quality gap is not wrong answers. It is **empty final answers after spending the whole 300-token completion budget on reasoning**.")
-    deep.append("- Therefore the current benchmark is measuring a mix of: (1) ARC capability, (2) answer-format reliability, and (3) whether `max_tokens=300` is enough when reasoning is enabled.")
-    deep.append("- One Z.ai response was `Answer: B` rather than exactly `B`; it is correct under parser scoring but fails the strict 'only the letter' instruction.")
+    deep.append(f"- Among responses that produced a parseable answer, provider answered-only accuracy stayed high on this ARC n={summary['n_items']} sample, but parsed wrong answers still occurred.")
+    deep.append(f"- Empty final answers after spending the whole {budget_text} on reasoning are a separate failure mode from wrong parsed answers.")
+    deep.append(f"- Therefore the current benchmark is measuring a mix of: (1) ARC capability, (2) answer-format reliability, and (3) whether the {budget_text} is enough when reasoning is enabled.")
+    deep.append("- Exact single-letter compliance varies by provider; see the provider-level table and empty-content table below for request-level details.")
     deep.append("")
     deep.append("## Provider-level correctness")
     deep.append("")
@@ -380,7 +395,7 @@ def _write_quality_reports(out_dir: Path, summary: dict[str, Any], item_rows: li
         "Provider-specific hard items: items where one provider emits an answer and the other exhausts reasoning budget.",
         "Prompt/item sensitivity: correlate failure with question length, answer label, and scientific subtopic (needs metadata/classification).",
         "Benchmark design sensitivity: rerun only failed/empty items with larger max_tokens or reasoning_effort=none to separate model knowledge from harness settings.",
-        "Confidence in conclusions: bootstrap CIs on n=30, then scale to n>=100 because this sample is small and label distribution is imbalanced.",
+        "Confidence in conclusions: bootstrap CIs and scale further if tighter intervals are needed.",
         "Data schema improvement: store gold labels, choices, and scoring fields inside results.json so quality analysis is reproducible without reloading HF.",
     ]:
         deep.append(f"- {item}")

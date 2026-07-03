@@ -64,6 +64,35 @@ def _provider_join(names: list[str]) -> str:
     return ", ".join(pretty[:-1]) + f", and {pretty[-1]}"
 
 
+def _suite_label(summary: dict[str, Any]) -> str:
+    suites = [str(s).upper() for s in summary.get("suites", [])]
+    return suites[0] if len(suites) == 1 else ", ".join(suites)
+
+
+def _n_items(summary: dict[str, Any], quality: dict[str, Any] | None = None) -> Any:
+    if quality and quality.get("n_items") is not None:
+        return quality["n_items"]
+    parity = summary.get("parity_summary", {})
+    if parity:
+        return max((row.get("n_compared", 0) for row in parity.values()), default="-")
+    return "-"
+
+
+def _completion_budget(summary: dict[str, Any]) -> int | None:
+    max_output = max(
+        (row.get("output_tokens", {}).get("max") or 0)
+        for row in _providers(summary).values()
+    )
+    return int(max_output) if max_output else None
+
+
+def _ok_totals(rows: dict[str, Any], providers: list[str]) -> str:
+    return "; ".join(
+        f"{_provider_name(p)} {rows[p].get('ok_requests', 0)}/{rows[p].get('requests', 0)} OK"
+        for p in providers
+    )
+
+
 def _headline(summary: dict[str, Any], quality: dict[str, Any] | None) -> str:
     rows = _providers(summary)
     providers = sorted(rows)
@@ -92,11 +121,16 @@ def _headline(summary: dict[str, Any], quality: dict[str, Any] | None) -> str:
             key=lambda p: qrows[p].get("strict_task_success") or 0,
         ) if qrows else None
         if best_strict:
+            suite_label = _suite_label(summary)
+            n_items = _n_items(summary, quality)
+            budget = _completion_budget(summary)
+            budget_text = f"{budget}-token completion budget" if budget else "completion budget"
+            clean_text = _ok_totals(rows, clean)
             return (
-                f"Both providers completed the merged ARC n=30 comparison cleanly: {_provider_join(clean)} had 60/60 OK requests with zero throttles. "
+                f"Both providers completed the merged {suite_label} n={n_items} comparison cleanly: {clean_text} with zero throttles. "
                 f"{_provider_name(fastest)} had the best median E2E latency; {_provider_name(best_tail)} had the best p95 tail latency. "
                 f"On strict task success, {_provider_name(best_strict)} led with {_fmt_pct(qrows[best_strict].get('strict_task_success'))}. "
-                "The main quality failure mode was not wrong parsed answers, but empty visible answers after exhausting the 300-token reasoning budget."
+                f"Quality failures were a mix of parsed wrong answers and empty/non-parseable outputs, including length-stop cases at the {budget_text}."
             )
 
     if clean:
@@ -150,7 +184,11 @@ def _chart_caption(filename: str, summary: dict[str, Any]) -> str:
             f"{_provider_name(p)} median {_fmt(rows[p].get('output_tokens', {}).get('median'), 0)} tokens, p95 {_fmt(rows[p].get('output_tokens', {}).get('p95'), 0)}"
             for p in providers
         ]
-        return "Successful responses only: " + "; ".join(parts) + ". p95 at 300 indicates completion-budget pressure."
+        suffix = ""
+        budget = _completion_budget(summary)
+        if budget:
+            suffix = f" Max observed output {budget} tokens indicates completion-budget pressure on length-stop cases."
+        return "Successful responses only: " + "; ".join(parts) + "." + suffix
 
     if filename == "paired_parity_subset.png":
         parity = summary.get("parity_summary", {})
@@ -167,7 +205,7 @@ def _chart_caption(filename: str, summary: dict[str, Any]) -> str:
     return "Chart generated from normalized GLMsBench artifacts."
 
 
-def _append_quality_section(lines: list[str], quality: dict[str, Any] | None) -> None:
+def _append_quality_section(lines: list[str], quality: dict[str, Any] | None, summary: dict[str, Any]) -> None:
     if not quality:
         return
     qrows = quality.get("provider_quality", {})
@@ -187,7 +225,10 @@ def _append_quality_section(lines: list[str], quality: dict[str, Any] | None) ->
             f"{row.get('empty_content', 0)} | {row.get('exact_single_letter_outputs', 0)} | {row.get('length_stops', 0)} |"
         )
     lines.append("")
-    lines.append("**Interpretation:** among parseable answers, both providers were correct on this small sample. The quality gap comes from empty visible answers that hit `stop_reason=length` after consuming the 300-token completion budget, not from parsed wrong answers.")
+    budget = _completion_budget(summary)
+    budget_text = f"{budget}-token completion budget" if budget else "completion budget"
+    n_items = quality.get("n_items", "this")
+    lines.append(f"**Interpretation:** this {n_items}-item sample contains both parsed wrong answers and empty/non-parseable answers. Length-stop cases consumed the {budget_text}, so strict task success captures format reliability and completion budget pressure in addition to ARC correctness.")
     lines.append("")
 
     item_summary = quality.get("item_summary", {})
@@ -218,13 +259,15 @@ def main() -> int:
     quality = json.loads(quality_path.read_text(encoding="utf-8")) if quality_path.exists() else None
 
     lines: list[str] = []
-    lines.append("# GLMsBench ARC n=30 Provider Decision Report")
+    suite_label = _suite_label(summary)
+    n_items = _n_items(summary, quality)
+    lines.append(f"# GLMsBench {suite_label} n={n_items} Provider Decision Report")
     lines.append("")
     lines.append("## Executive summary")
     lines.append("")
     lines.append(_headline(summary, quality))
     lines.append("")
-    lines.append("This report compares Z.ai and umans serving GLM-5.2 on a 30-item ARC sample. It is a small but chartable run designed to validate the benchmark-to-report workflow before scaling.")
+    lines.append(f"This report compares {_provider_join(summary.get('providers', []))} serving GLM-5.2 on a {n_items}-item {suite_label} sample. It uses {summary.get('n_requests', '-')} total requests across {len(summary.get('providers', []))} providers.")
     lines.append("")
 
     lines.append("## Run facts")
@@ -269,7 +312,7 @@ def main() -> int:
         )
     lines.append("")
 
-    _append_quality_section(lines, quality)
+    _append_quality_section(lines, quality, summary)
 
     stats = _read_optional(analysis_dir / "stats-findings.md")
     if stats:

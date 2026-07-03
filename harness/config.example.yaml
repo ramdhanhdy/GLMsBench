@@ -55,12 +55,15 @@ providers:
     #     benchmark run (thousands of requests) but fine for light use.
     # Direct API-key HTTP access (what this harness does) is an officially
     # supported "Manual Configuration" path, not just the umans CLI.
-    # RELIABILITY: umans is the more-available side of the asymmetry (no
-    # observed demand-driven outages), but its own constraint is the
-    # concurrency cap above, not throttling — though transient
-    # "overloaded_error" 502s have been observed and are retried by
-    # providers/retry.py. Empirically, running at 3 concurrent requests (not
-    # yet the max of 4) already sustains the 100-300M tokens/day "maximized"
-    # usage tier — so 4 likely has headroom beyond what's been tested.
+    # RELIABILITY: umans has a hard provider-side concurrent-request cap and
+    # repeated over-limit traffic can suspend the account. Large/high-token
+    # runs must leave the provider exclusive to the benchmark and run
+    # sequentially with fail-fast enabled. Do not raise this back to the plan's
+    # advertised cap unless the provider confirms dashboard concurrency cannot
+    # burst above the local semaphore.
     pricing: {mode: subscription, monthly_usd: 50}
-    rate: {concurrency: 4}
+    rate:
+      concurrency: 1
+      retry: {max_attempts: 1, base_backoff_ms: 1000}
+      fail_fast_statuses: [429, 403]
+      request_delay_s: 2.0

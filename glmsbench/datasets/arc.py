@@ -9,8 +9,10 @@ def _load_hf(*args, **kwargs):
 
 class ARCLoader:
     name = "arc"
-    # See MMLULoader for the reasoning_effort/max_tokens rationale.
-    max_tokens = 300
+    # GLM-5.2 can spend 300-1000 hidden reasoning tokens on hard ARC items
+    # before emitting the visible answer. ARC uses 1200 so strict success is
+    # not dominated by artificial length stops.
+    max_tokens = 1200
 
     def load(self, n: int) -> list[DatasetItem]:
         ds = _load_hf("allenai/ai2_arc", "ARC-Challenge", split="test")

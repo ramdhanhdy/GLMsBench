@@ -74,6 +74,15 @@ class Rate(BaseModel):
     rpm: Optional[int] = None
     tpm: Optional[int] = None
     retry: RetryConfig = Field(default_factory=RetryConfig)
+    # Providers with suspension penalties can opt into provider-level
+    # circuit-breaking. When a request returns one of these statuses, the
+    # runner stops scheduling further requests for that provider instead of
+    # draining an already-created coroutine queue into a suspended account.
+    fail_fast_statuses: list[int] = Field(default_factory=list)
+    # Optional post-request pacing for fragile providers. This is separate
+    # from rpm because some providers enforce concurrent streaming-job slots
+    # rather than minute buckets.
+    request_delay_s: float = 0.0
 
 
 class ProviderConfig(BaseModel):
